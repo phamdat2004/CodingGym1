@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chợ Code - Bán Source Code Chất Lượng</title>
+    
+    <script src="js/script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            position: relative;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        footer {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: white;
+            padding: 40px 0;
+        }
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        .chat-call-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .chat-bubble {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .chat-bubble.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .chat-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            padding: 10px;
+            border-radius: 25px;
+            background: #007bff;
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            animation: shake 1s infinite;
+        }
+        .chat-button i {
+            margin-right: 5px;
+        }
+        .chat-button:hover {
+            background: #0056b3;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-chat {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="fireworks"></canvas>
+    <header class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+            <h1>Đạt làm BackEnd 💻</h1>
+            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
+            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Về trang chủ</a>
+        
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Danh mục</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                </ul>
+                <form class="d-flex ms-3" id="searchForm">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Tìm kiếm...">
+                </form>
+            </div>
+
+        </div>
+    </nav>
+    
+    <main class="container mt-4">
+        <div class="row">
+            
+            <section class="col-md-9">
+                <h2>ASP.NET</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/source-code-asp.net-mvc5-cua-hang-bach-hoa-tong-hop-163658.jpg" class="card-img-top" alt="Code Android">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Source code ASP.NET MVC5 cửa hàng bách hóa tổng hợp</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a href="https://drive.google.com/file/d/1mYbOuHp-VKzENNyM306uN-qQJdrUPdHl/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/free-sharecode-website-ban-hang-asp.net-mvc5-9126.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Sharecode Website bán hàng Asp.Net MVC5</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a href="https://github.com/Cuongyd196/ictshop_aspnet" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/source-code-website-ban-hang-online-bang-asp.net-mvc-5-webapi-cho-do-an-tot-nghiep-7403.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">[.Net MVC 5] Web bán hàng online </p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a href="https://www.mediafire.com/file/w496culraydbdht/uStora_2017.zip" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/code-do-an-thiet-ke-web-ban-hang-sony-asp.net-full-code-14566.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Code đồ án thiết kế web bán hàng sony ASP.Net full code</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a href="https://www.mediafire.com/download/zcztybev3k55prs/[Sharecode.vn]_Code_do_an_thiet_ke_web_ban_hang_sony_ASP.Net_full_code.rar" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-website-ban-hang-c-day-du-chuc-nangco-bao-cao-ban-hang-voi-bao-cao-word-102231.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Đồ án website bán hàng C# đầy đủ chức năng(có báo cáo bán hàng) với báo cáo word</p>
+                                <span class="price text-danger fw-bold">50.000đ</span>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/[yeu-cau-bo-sung-video-demo-thay-doi-anh-dai-dien]-ung-dung-website-ve-nha-hang-quan-ly-ban-hang-code-web-code-do-an-share-code-source-code-web-113819.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Ứng dựng website về nhà hàng , quản lý bán hàng Code web Code đồ án Share code Source code web</p>
+                                <span class="price text-danger fw-bold">200.000đ</span>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/full-code-web-tmdt-ban-giay-du-chuc-nang-don-gian-asp.net-mvc-165752.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP.NET</h5>
+                                <p class="card-text">Full Code Web TMĐT Bán giày đủ chức năng đơn giản ASP.NET MVC</p>
+                                <span class="price text-danger fw-bold">50.000đ</span>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer class="text-white text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Về Chợ Code</h5>
+                    <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
+                    <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
+                    <p>Email: phamtiendat21072004@gmail.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Danh mục</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Kết nối với chúng tôi</h5>
+                    <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+                    <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- sdt -->
+  <div class="chat-call-container">
+    <div class="chat-bubble" id="chat-message">Xin chào!</div>
+    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
+    
+    <div class="chat-button" id="chat-button">
+        <i class="fa-regular fa-comments"></i> Chat
+    </div>
+    <div class="chat-button" id="call-button">
+        <i class="fa-solid fa-phone"></i> Gọi
+    </div>
+</div>
+
+<div class="chat-window" id="chat-window">
+    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+        <button id="send-button">Gửi</button>
+    </div>
+</div>
+
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById("chat-message").classList.add("show");
+            }, 500);
+            setTimeout(() => {
+                document.getElementById("call-message").classList.add("show");
+            }, 1000);
+        });
+        
+        document.getElementById("chat-button").addEventListener("click", function() {
+            const chatWindow = document.getElementById("chat-window");
+            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+        });
+        
+        document.getElementById("close-chat").addEventListener("click", function() {
+            document.getElementById("chat-window").style.display = "none";
+        });
+        
+        document.getElementById("send-button").addEventListener("click", function() {
+            const input = document.getElementById("chat-input");
+            const message = input.value.trim();
+            if (message) {
+                const chatBody = document.getElementById("chat-body");
+                const userMessage = document.createElement("div");
+                userMessage.textContent = "Bạn: " + message;
+                chatBody.appendChild(userMessage);
+                input.value = "";
+                
+                setTimeout(() => {
+                    const botMessage = document.createElement("div");
+                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
+                    chatBody.appendChild(botMessage);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

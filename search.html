@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kết quả tìm kiếm</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<main class="container mt-4">
+    <h2>Kết quả tìm kiếm</h2>
+    <div id="searchResults" class="row"></div>
+
+    <a href="index.html" class="btn btn-secondary mt-3">Quay lại trang chủ</a>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let params = new URLSearchParams(window.location.search);
+    let keyword = params.get("q").toLowerCase();
+
+    // Dữ liệu sản phẩm từ nhiều trang (có thể lấy từ API hoặc server)
+    let products = [
+        { title: "Game Phiêu Lưu", category: "Android", price: "Free", image: "img/g1.jpg", link: "https://drive.google.com/file/d/1b1UUdMogkWYG8Rrv9Jd2A_kELI4KQWOC/view" },
+        { title: "App Tính Toán", category: "Android", price: "Free", image: "img/g2.jpg", link: "https://drive.google.com/file/d/1NPnQ4YhLs_5UYO83-2_uV9gxIg6HZo3j/view" },
+        { title: "Website Thời Trang", category: "PHP & MySQL", price: "250.000đ", image: "img/g6.jpg", link: "qr.html" },
+        { title: "Ứng dụng Quản lý Công Việc", category: "Android", price: "200.000đ", image: "img/g7.jpg", link: "qr.html" },
+        { title: "Ứng dụng Đọc Truyện", category: "React Native", price: "350.000đ", image: "img/g8.jpg", link: "qr.html" }
+    ];
+
+    let resultContainer = document.getElementById("searchResults");
+    let resultHTML = "";
+
+    products.forEach(product => {
+        if (product.title.toLowerCase().includes(keyword) || product.category.toLowerCase().includes(keyword)) {
+            resultHTML += `
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="${product.image}" class="card-img-top" alt="${product.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.category}</h5>
+                            <p class="card-text">${product.title}</p>
+                            <span class="price text-danger fw-bold">${product.price}</span>
+                            <a href="${product.link}" class="btn btn-primary d-block mt-2">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    });
+
+    resultContainer.innerHTML = resultHTML || "<p>Không tìm thấy sản phẩm phù hợp.</p>";
+});
+</script>
+
+</body>
+</html>

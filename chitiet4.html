@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chợ Code - Bán Source Code Chất Lượng</title>
+    
+    <script src="js/script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            position: relative;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        footer {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: white;
+            padding: 40px 0;
+        }
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        .chat-call-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .chat-bubble {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .chat-bubble.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .chat-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            padding: 10px;
+            border-radius: 25px;
+            background: #007bff;
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            animation: shake 1s infinite;
+        }
+        .chat-button i {
+            margin-right: 5px;
+        }
+        .chat-button:hover {
+            background: #0056b3;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-chat {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product-detail {
+            margin-bottom: 70px;
+            margin-top: 50px;
+        }
+        .product-img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .demo-images img {
+            max-width: 100px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="fireworks"></canvas>
+    <header class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+            <h1>Đạt làm BackEnd 💻</h1>
+            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
+            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fa-solid fa-backward"></i> Về trang chủ</a>
+        
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Danh mục</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                </ul>
+                <form class="d-flex ms-3" id="searchForm">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Tìm kiếm...">
+                </form>
+            </div>
+
+        </div>
+    </nav>
+    
+  
+    <div class="container product-detail">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="mainImage" src="https://sharecode.vn/FilesUpload/Code/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141741.jpg" class="product-img" alt="Sản phẩm chính">
+                <div class="demo-images mt-3">
+                    <img src="https://sharecode.vn/FilesUpload/CodeUpload/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141742.jpg"  alt="Demo 1">
+                    <img src="https://sharecode.vn/FilesUpload/CodeUpload/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141743.jpg"  alt="Demo 2">
+                    <img src="https://sharecode.vn/FilesUpload/CodeUpload/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141744.jpg"  alt="Demo 3">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Ứng dụng nghe nhạc FREE code chuẩn, dễ hiểu, có video</h2>
+                <p class="text-danger fw-bold">Giá: Free</p>
+                <p>Ứng dụng nghe nhạc có các tính năng: slide ảnh, album, chủ đề. Code đủ nhiều để làm bài tập lớn, code tối ưu, dễ hiểu giúp bạn dễ dàng học tập và sáng tạo.
+                </br>
+                    Hiện tại đang dùng dữ liệu mock để demo, bạn có thể tự viết API để tăng độ phức tạp cho bài tập. Code free. Các class đều đã cập nhật androidX
+            </br>
+                    Source code game</p>
+                <a href="https://drive.google.com/file/d/1IG46LCjf2bBtiA6BaFujml53DONST1d4/view" class="btn btn-primary">Tải ngay</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="text-white text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Về Chợ Code</h5>
+                    <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
+                    <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
+                    <p>Email: phamtiendat21072004@gmail.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Danh mục</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Kết nối với chúng tôi</h5>
+                    <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+                    <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- sdt -->
+  <div class="chat-call-container">
+    <div class="chat-bubble" id="chat-message">Xin chào!</div>
+    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
+    
+    <div class="chat-button" id="chat-button">
+        <i class="fa-regular fa-comments"></i> Chat
+    </div>
+    <div class="chat-button" id="call-button">
+        <i class="fa-solid fa-phone"></i> Gọi
+    </div>
+</div>
+
+<div class="chat-window" id="chat-window">
+    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+        <button id="send-button">Gửi</button>
+    </div>
+</div>
+
+<script>
+    function changeImage(src) {
+        document.getElementById("mainImage").src = src;
+    }
+</script>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById("chat-message").classList.add("show");
+            }, 500);
+            setTimeout(() => {
+                document.getElementById("call-message").classList.add("show");
+            }, 1000);
+        });
+        
+        document.getElementById("chat-button").addEventListener("click", function() {
+            const chatWindow = document.getElementById("chat-window");
+            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+        });
+        
+        document.getElementById("close-chat").addEventListener("click", function() {
+            document.getElementById("chat-window").style.display = "none";
+        });
+        
+        document.getElementById("send-button").addEventListener("click", function() {
+            const input = document.getElementById("chat-input");
+            const message = input.value.trim();
+            if (message) {
+                const chatBody = document.getElementById("chat-body");
+                const userMessage = document.createElement("div");
+                userMessage.textContent = "Bạn: " + message;
+                chatBody.appendChild(userMessage);
+                input.value = "";
+                
+                setTimeout(() => {
+                    const botMessage = document.createElement("div");
+                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
+                    chatBody.appendChild(botMessage);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

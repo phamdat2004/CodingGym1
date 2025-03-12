@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code - Khóa học lập trình</title>
+    
+    <script src="js/script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            position: relative;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        footer {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: white;
+            padding: 40px 0;
+        }
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        .chat-call-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .chat-bubble {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .chat-bubble.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .chat-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            padding: 10px;
+            border-radius: 25px;
+            background: #007bff;
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            animation: shake 1s infinite;
+        }
+        .chat-button i {
+            margin-right: 5px;
+        }
+        .chat-button:hover {
+            background: #0056b3;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-chat {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .blinking-text {
+            animation: blink 0.5s infinite;
+            color: rgb(255, 133, 18);
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .marquee-text {
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            animation: marquee 20s linear infinite;
+            color: rgb(255, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+        }
+        @keyframes marque {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .marquee-tex {
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            animation: marque 15s linear infinite;
+            color: rgb(255, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+            z-index: 1000;
+            
+        }
+  
+        .splash-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+        }
+        .splash-content img {
+            width: 150px;
+            border-radius: 50%;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn">
+            <h2>💡Coding Repository💡</h2>
+            <p>Web đang trong quá trình hoàn thiện❗❗❗</p>
+            <p style="color: red; font-size: 20px;">Web phục vụ cho quá trình học tập Ae tải về tham khảo</p>
+        </div>
+    </div>
+    <canvas class="fireworks"></canvas>
+    <header class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+            <h1>Đạt làm BackEnd 💻</h1>
+            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
+            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Code Repository</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Danh mục</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                </ul>
+                <form class="d-flex" role="search" id="searchForm">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm..." id="searchInput">
+                    <button class="btn btn-outline-light" type="submit">Tìm</button>
+                </form>
+                
+            </div>
+
+        </div>
+    </nav>
+    <p class="marquee-text">🔥 Sau khi tải code về liên hệ ZALO: 0339722095 hỗ trợ cài 🔥</p>
+    <p class="marquee-tex">🔥 Khi nạp tiền mà chưa nhận dc code liên hệ ZALO ngay 🔥</p>
+    <main class="container mt-4">
+        <div class="row">
+            <aside class="col-md-3">
+                <h2>Danh mục sản phẩm</h2>
+                <div class="category-links">
+                    <a href="adr.html" class="category-item">Android</a>
+                   
+                    <a href="html.html" class="category-item">HTML & Template</a>
+                    <a href="php.html" class="category-item">PHP & MySQL</a>
+                    <a href="java.html" class="category-item">Java & SpringBoot</a>
+                    <a href="asp.html" class="category-item">ASP.NET</a>
+         
+
+                </div>
+                <h2 class="blinking-text" style="color: red;">Khóa học lập trình🔥</h2>
+                <div class="category-links">
+                    <a href="khoahoc.html" class="category-item" style="color: yellow;">WEB BACKEND JAVA (28Tech)</a>
+                
+                </div>
+                <h2 class="blinking-text" style="color: red;">Công cụ AI🔥</h2>
+                <div class="category-links">
+                    <a href="ai.html" class="category-item" style="color: yellow;">AI (bản thử nghiệm) <i class="fa-solid fa-robot"></i></br>Chưa được tối ưu</a>
+                   
+                </div>
+                
+            </aside>
+            
+            
+            
+            
+            <section class="col-md-9">
+                
+                <h2 class="blinking-text">Source Code Mới Nhất🎉
+                    
+                </h2>
+                
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <a href="chitiet4.html" style="text-decoration: none; color: #1a1a1a;">
+                            <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141741.jpg" class="card-img-top" alt="Code Android">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Ứng dụng nghe nhạc FREE code chuẩn, dễ hiểu, có video</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/10IuNcgswja7AgSxpsw_Sz5lfhkX10QlA/view" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+                                <a href="https://drive.google.com/file/d/1IG46LCjf2bBtiA6BaFujml53DONST1d4/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                        </a>
+                        
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="chitiet3.html" style="text-decoration: none; color: #1a1a1a;">
+                            <div class="card">
+                            <img src="https://sharecode.vn/FilesUpload/Code/full-code-web-ban-sach-online-bang-asp.net-mvc-114655.jpg" class="card-img-top" alt="Code Android">
+                            <div class="card-body">
+                                <h5 class="card-title">ASP/ASP.NET</h5>
+                                <p class="card-text">Full code web bán sách online bằng ASP.Net MVC</p>
+                                <span class="price text-danger fw-bold">50.000đ</span>
+                                <a style="background-color: rgb(255, 0, 0);" href="https://rr1---sn-5hne6nz6.googlevideo.com/videoplayback?expire=1741773235&ei=UwXRZ-nqN6TQ6dsPp--IgAg&ip=145.14.139.155&id=o-AFcPKsbUDQSZOG7gQiOwZQFOn2pZQI-iZ6i5DhdPECJZ&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&bui=AUWDL3yjCK6I9GKEq15S33Ia7Wmprs0CuB4Ay3LdcylX05oSiQZUybzUp3DuxSyI3Wwg0G5VWy3FHhyT&spc=RjZbSXg-Iezhu507YfsFlm00Hdxkt_Jt_iEN30_SHLnRr2HzqaQ3ec9SEx_-rhDySlE&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=805928&ratebypass=yes&dur=35.085&lmt=1711082153468840&fexp=24350590,24350737,24350827,24350961,24351147,24351173,24351206,24351276,24351283,24351347,24351349,24351377,51326932,51358317,51411872&c=ANDROID&txp=6209224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIhAOyJWiYzZgA8fsk31wsI3l_v-G3GPs4-4NDJfXYR-5vRAiBkd1s7um35tbr1hD8u-ErXEq_dWGryLEQeBaRrgrCKHw%3D%3D&title=Source+web+B%C3%81N+S%C3%81CH+Asp.net+MVC&redirect_counter=1&cm2rm=sn-4g5edz76&rrc=80&req_id=d204c96a3caca3ee&cms_redirect=yes&cmsv=e&met=1741751642,&mh=an&mip=2405:4802:1bee:4f10:464:d0f3:6329:91da&mm=34&mn=sn-5hne6nz6&ms=ltu&mt=1741750982&mv=D&mvi=1&pl=0&rms=ltu,au&lsparams=met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=AFVRHeAwRAIgXX7PW3S7uj6_ZuKRsg-z_t0kVqWWFQeZ4rCcCh_9FcQCIG_JQhGvlUafFy8oZRvwhCYBHsB_PBiyhpS0uef3ajrp" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                        </a>
+                        
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="chitiet.html" style="text-decoration: none; color: #1a1a1a;">
+                            <div class="card">
+                            <img src="img/g1.jpg" class="card-img-top" alt="Code Android">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Source code game Phiêu Lưu & Giải Đố - Beone</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/113UqlCgv3Gmcs7Qe3XW8d9ZJObN1pIhJ/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+                                <a href="https://drive.google.com/file/d/1b1UUdMogkWYG8Rrv9Jd2A_kELI4KQWOC/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                        </a>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <a href="chitiet2.html" style="text-decoration: none; color: #1a1a1a;">
+                            <div class="card">
+                            <img src="img/g2.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Code App game tính toán android đơn giản</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1rr5Sg8VRJOLrgLLvYqREDmj8oBpiji4C/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+                                <a href="https://drive.google.com/file/d/1NPnQ4YhLs_5UYO83-2_uV9gxIg6HZo3j/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                        </a>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/g3.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Đua Pokemon - Pokemon Crossing source code</p>
+                                <span class="price text-danger fw-bold">Free</span>
+                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/1y9exw4MyEUnYP9rw_7qwWGcq4cbaR0uO/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+
+                                <a href="https://www.mediafire.com/file/mfpcq6b6h6rebgg/MiniGame.rar/file" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/g4.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Candy Jump + Admob + Multiple Characters</p>
+                                <span class="price text-danger fw-bold">450.000đ</span>
+
+                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dDUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/g5.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">Android</h5>
+                                <p class="card-text">Jet Pack Pig - full game android source code</p>
+                                <span class="price text-danger fw-bold">300.000đ</span>
+                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
+
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/g6.jpg" class="card-img-top" alt="Code React Native">
+                            <div class="card-body">
+                                <h5 class="card-title">PHP & MySQL</h5>
+                                <p class="card-text">Full code website cửa hàng thời trang tối giản chuẩn SEO cập nhật </p>
+                                <span class="price text-danger fw-bold">250.000đ</span>
+                                <a style="background-color: red;" href="https://woodmart.xtemos.com/demo-fashion-minimalism/demo/fashion-minimalism/" class="btn btn-primary d-block mt-2">Demo Web</a>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item active"><a class="page-link" href="index.html">1</a></li>
+                <li class="page-item"><a class="page-link" href="page2.html">2</a></li>
+            </ul>
+        </nav>
+        
+    </main>
+    
+    <footer class="text-white text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Về Chợ Code</h5>
+                    <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
+                    <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
+                    <p>Email: phamtiendat21072004@gmail.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Danh mục</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Kết nối với chúng tôi</h5>
+                    <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+                    <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- sdt -->
+  <div class="chat-call-container">
+    <div class="chat-bubble" id="chat-message">Xin chào!</div>
+    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
+    
+    <div class="chat-button" id="chat-button">
+        <i class="fa-regular fa-comments"></i> Chat
+    </div>
+    <div class="chat-button" id="call-button">
+        <i class="fa-solid fa-phone"></i> Gọi
+    </div>
+</div>
+
+<div class="chat-window" id="chat-window">
+    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+        <button id="send-button">Gửi</button>
+    </div>
+</div>
+
+    <script>
+         function searchFunction() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let cards = document.querySelectorAll("#productList .col-md-4");
+            cards.forEach(card => {
+                let title = card.querySelector(".card-title").innerText.toLowerCase();
+                let text = card.querySelector(".card-text").innerText.toLowerCase();
+                if (title.includes(input) || text.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+        
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("splashScreen").style.display = "none";
+            }, 5000);
+        }
+    </script>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById("chat-message").classList.add("show");
+            }, 500);
+            setTimeout(() => {
+                document.getElementById("call-message").classList.add("show");
+            }, 1000);
+        });
+        
+        document.getElementById("chat-button").addEventListener("click", function() {
+            const chatWindow = document.getElementById("chat-window");
+            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+        });
+        
+        document.getElementById("close-chat").addEventListener("click", function() {
+            document.getElementById("chat-window").style.display = "none";
+        });
+        
+        document.getElementById("send-button").addEventListener("click", function() {
+            const input = document.getElementById("chat-input");
+            const message = input.value.trim();
+            if (message) {
+                const chatBody = document.getElementById("chat-body");
+                const userMessage = document.createElement("div");
+                userMessage.textContent = "Bạn: " + message;
+                chatBody.appendChild(userMessage);
+                input.value = "";
+                
+                setTimeout(() => {
+                    const botMessage = document.createElement("div");
+                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
+                    chatBody.appendChild(botMessage);
+                }, 1000);
+          
+            }
+        });
+    </script>
+</body>
+</html>
