@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Source Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #f8f9fa; }
+        .container { max-width: 900px; margin-top: 20px; }
+        .code-item { box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; }
+        .code-item img { width: 100%; height: 150px; object-fit: cover; }
+        .hidden { display: none; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 500px; }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+            <h1>Đạt làm BackEnd 💻</h1>
+            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
+            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div  class="container">
+            <a class="navbar-brand" href="index.html">Về trang chủ</a>
+        
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+           
+        </div>
+    </nav>
+    <div class="container">
+        <button class="btn btn-primary mb-3" id="showUploadForm">Tải Code lên</button>
+        
+        <div id="uploadModal" class="modal">
+            <div class="modal-content">
+                <h2 class="text-center">Upload Source Code</h2>
+                <form id="uploadForm">
+                    <div class="mb-3">
+                        <input type="text" id="codeName" class="form-control" placeholder="Tên code" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" id="codeType" class="form-control" placeholder="Loại code (Android, PHP...)" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="codePrice" class="form-control" placeholder="Giá code (0 = miễn phí)" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" id="authorName" class="form-control" placeholder="Người đăng" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="url" id="demoLink" class="form-control" placeholder="Link xem demo" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="url" id="downloadLink" class="form-control" placeholder="Link tải code" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" id="imageInput" class="form-control" accept="image/*" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-success" id="uploadBtn">Tải lên</button>
+                        <button type="button" class="btn btn-danger" id="cancelUpload">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="codeList" class="row mt-4"></div>
+        <div id="qrModal" class="modal">
+            <div class="modal-content text-center">
+                <span class="btn-close" onclick="closeQRModal()">&times;</span>
+                <h4>Quét mã QR để thanh toán</h4>
+                <img id="qrImage" src="img/qr.jpg" width="200" />
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('showUploadForm').addEventListener('click', () => {
+            document.getElementById('uploadModal').style.display = 'flex';
+        });
+        document.getElementById('cancelUpload').addEventListener('click', () => {
+            document.getElementById('uploadForm').reset();
+            document.getElementById('uploadModal').style.display = 'none';
+        });
+        document.getElementById('uploadBtn').addEventListener('click', () => {
+            let codeName = document.getElementById('codeName').value;
+            let codeType = document.getElementById('codeType').value;
+            let codePrice = document.getElementById('codePrice').value;
+            let authorName = document.getElementById('authorName').value;
+            let demoLink = document.getElementById('demoLink').value;
+            let downloadLink = document.getElementById('downloadLink').value;
+            let imageInput = document.getElementById('imageInput');
+            
+            if (!codeName || !authorName || !demoLink || !downloadLink || imageInput.files.length === 0) {
+                alert("Vui lòng điền đầy đủ thông tin!");
+                return;
+            }
+            let fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                let fileData = {
+                    id: Date.now(),
+                    type: codeType,
+                    name: codeName,
+                    price: codePrice,
+                    author: authorName,
+                    demo: demoLink,
+                    download: downloadLink,
+                    imageUrl: event.target.result
+                };
+                let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
+                storedData.push(fileData);
+                localStorage.setItem("uploadedCodes", JSON.stringify(storedData));
+                updateCodeList();
+            };
+            fileReader.readAsDataURL(imageInput.files[0]);
+            document.getElementById('uploadForm').reset();
+            document.getElementById('uploadModal').style.display = 'none';
+        });
+        function updateCodeList() {
+            let codeList = document.getElementById('codeList');
+            codeList.innerHTML = "";
+            let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
+            storedData.forEach(code => {
+                codeList.innerHTML += `
+                    <div class="col-md-4 mb-4" id="code-${code.id}">
+                        <div class="card code-item">
+                            <img src="${code.imageUrl}" class="card-img-top" alt="Demo">
+                            <div class="card-body">
+                                <h5 class="card-title">${code.name} - <small>${code.type}</small></h5>
+                                <p class="card-text">Người đăng: ${code.author}</p>
+                                <a href="${code.demo}" class="btn btn-info btn-sm" target="_blank">Xem Demo</a>
+                                ${code.price > 0 ? `<button class="btn btn-warning btn-sm" onclick="showQRModal()">Mua (${code.price} VNĐ)</button>` : `<a href="${code.download}" class="btn btn-success btn-sm" target="_blank">Tải Code</a>`}
+                             
+
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+        function showQRModal() {
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+        function deleteCode(id) {
+            let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
+            storedData = storedData.filter(code => code.id !== id);
+            localStorage.setItem("uploadedCodes", JSON.stringify(storedData));
+            updateCodeList();
+        }
+        updateCodeList();
+    </script>
+</body>
+</html>
+  <!-- <button class="btn btn-danger btn-sm" onclick="deleteCode(${code.id})">Xóa</button> -->

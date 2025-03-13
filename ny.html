@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Repository</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .content {
+            flex: 1;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .card p {
+            color: gray;
+        }
+        .btn {
+            display: block;
+            text-align: center;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Code Repository</div>
+    <div class="container">
+        <div class="sidebar">
+            <button>Android</button>
+            <button>HTML & CSS</button>
+            <button>Java & SpringBoot</button>
+            <button>PHP & MySQL</button>
+        </div>
+        <div class="content">
+            <div class="product-grid">
+                <div class="card">
+                    <img src="https://via.placeholder.com/250" alt="Code Example">
+                    <h3>Ứng dụng Android</h3>
+                    <p>Ứng dụng nghe nhạc miễn phí.</p>
+                    <a href="#" class="btn">Xem chi tiết</a>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/250" alt="Code Example">
+                    <h3>Website bán hàng</h3>
+                    <p>Website bán hàng đơn giản bằng PHP & MySQL.</p>
+                    <a href="#" class="btn">Xem chi tiết</a>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/250" alt="Code Example">
+                    <h3>Game 2D</h3>
+                    <p>Game đi cảnh đơn giản bằng Unity.</p>
+                    <a href="#" class="btn">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
