@@ -307,6 +307,27 @@
     font-weight: bold;
     animation: rainbow 2s infinite linear;
 }
+.navbar .navbar-brand {
+        margin-right: 9px; /* Giảm khoảng cách giữa các mục */
+        font-size: 22px; /* Tăng hoặc giảm kích thước chữ */
+    }
+
+    #balanceSection {
+        background: #fff;
+        padding: 5px 15px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    #balanceSection span {
+        color: #28a745;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
 
     </style>
 </head>
@@ -336,6 +357,7 @@
         <div id="welcomeSection" class="hidden">
             <span id="welcomeMessage" class="me-3"></span>
             <button onclick="logout()" class="btn btn-danger btn-custom">Đăng Xuất</button>
+           
         </div>
     </div>
 </div>
@@ -389,30 +411,51 @@
     </header>
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div  class="container">
+        <div class="container d-flex align-items-center">
             <a class="navbar-brand" href="#">Trang chủ <i class="fa-solid fa-house-chimney"></i></a>
-            <a class="navbar-brand" href="hosting.html" style="margin-left: 60px;">Thuê hosting <i class="fa-solid fa-globe"></i></a>
-            <a class="navbar-brand" href="upload.html" style="margin-left: 60px;">Tải code của bạn lên <i class="fa-solid fa-cloud-arrow-up"></i></a>
-            <a class="navbar-brand" href="#" id="withdrawButton" style="margin-left: 60px;">Rút tiền <i class="fa-solid fa-money-check-dollar"></i></a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-           
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                   
-                </ul>
-                <form class="d-flex" role="search" id="searchForm">
-                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm..." id="searchInput">
-                    <button class="btn btn-outline-light" type="submit">Tìm</button>
-                </form>
-                
+            <a class="navbar-brand" href="hosting.html">Thuê hosting <i class="fa-solid fa-globe"></i></a>
+            <a class="navbar-brand" href="upload.html">Tải code lên <i class="fa-solid fa-cloud-arrow-up"></i></a>
+            <a class="navbar-brand" href="#" id="withdrawButton">Rút tiền <i class="fa-solid fa-money-check-dollar"></i></a>
+            <a class="navbar-brand" href="#" id="depositButton" onclick="openDeposit()">Nạp tiền <i class="fa-solid fa-money-check-dollar"></i></a>
+    
+            <!-- Phần số dư -->
+            <div id="balanceSection">
+                <strong>Số dư:</strong> <span id="balance">0</span> VNĐ
             </div>
-
         </div>
     </nav>
    
+
+<!-- Cửa sổ modal nhập mã nạp tiền -->
+<div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">💰 Nạp tiền</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p><strong>Quét mã QR hoặc nhập mã để nạp tiền:</strong></p>
+
+                <!-- Hình ảnh mã QR -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=NAPTIEN123" 
+                     alt="Mã QR nạp tiền" class="mb-3" width="150">
+
+                <p class="text-muted">(CK đúng nôi dung: <strong class="text-success">tên tài khoản của bạn</strong>, hệ thống sẽ cộng tiền tự động)</p>
+
+                <input type="text" id="depositCode" class="form-control mb-2 text-center" 
+                       placeholder="Nhập mã code...">
+
+                <p id="depositError" class="text-danger d-none"></p>
+
+                <button onclick="confirmDeposit()" class="btn btn-primary w-100">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <!-- Modal thông báo -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
@@ -632,10 +675,10 @@
     <div class="chat-bubble" id="chat-message">Xin chào!</div>
     <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
     
-    <div class="chat-button" id="chat-button">
+    <div class="chat-button" id="chat-button" >
         <i class="fa-regular fa-comments"></i> Chat
     </div>
-    <div class="chat-button" id="call-button">
+    <div class="chat-button" id="call-button" style="background-color: lime;">
         <i class="fa-solid fa-phone"></i> Gọi
     </div>
 </div>
@@ -648,6 +691,65 @@
         <button id="send-button">Gửi</button>
     </div>
 </div>
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    let savedUser = localStorage.getItem("username");
+    let isLoggedIn = localStorage.getItem("isLoggedIn");
+    let balance = parseInt(localStorage.getItem("balance")) || 0; // Lấy số dư từ localStorage hoặc mặc định là 0
+
+    document.getElementById("balance").textContent = balance;
+
+    if (savedUser && isLoggedIn === "true") {
+        showUser(savedUser);
+    }
+});
+
+function openDeposit() {
+    let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn !== "true") {
+        alert("⚠️ Vui lòng đăng nhập để nạp tiền!");
+        return;
+    }
+
+    let depositModal = new bootstrap.Modal(document.getElementById("depositModal"));
+    depositModal.show();
+}
+
+function confirmDeposit() {
+    let code = document.getElementById("depositCode").value.trim();
+    let depositError = document.getElementById("depositError");
+
+    if (code !== "NAPTIEN123") {
+        depositError.textContent = "⚠️ Mã code không hợp lệ!";
+        depositError.classList.remove("d-none", "text-success");
+        depositError.classList.add("text-danger");
+        return;
+    }
+
+    // Cộng tiền nếu mã hợp lệ
+    let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
+    let newBalance = currentBalance + 10000;
+    localStorage.setItem("balance", newBalance);
+    document.getElementById("balance").textContent = newBalance;
+
+    // Hiển thị thông báo nạp thành công
+    depositError.textContent = "✅ Nạp tiền thành công! +10.000 VNĐ";
+    depositError.classList.remove("d-none", "text-danger");
+    depositError.classList.add("text-success");
+
+    // Tự động đóng modal sau 1.5s
+    setTimeout(() => {
+        let depositModal = bootstrap.Modal.getInstance(document.getElementById("depositModal"));
+        depositModal.hide();
+    }, 1500);
+}
+
+</script>
 
 
 <script>
@@ -730,10 +832,14 @@ function showUser(user) {
 }
 
 function logout() {
-    localStorage.setItem("isLoggedIn", "false");
-    alert("👋 Bạn đã đăng xuất!");
-    location.reload();
+    localStorage.removeItem("isLoggedIn"); // Xóa trạng thái đăng nhập
+    localStorage.setItem("balance", "0"); // Đặt số dư về 0
+    document.getElementById("balance").textContent = "0"; // Cập nhật giao diện
+
+    alert("🚪 Đăng xuất thành công!");
+    location.reload(); // Load lại trang
 }
+
 
 
 </script>
@@ -815,7 +921,7 @@ window.onload = function() {
                 
                 setTimeout(() => {
                     const botMessage = document.createElement("div");
-                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
+                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Bạn vui lòng vào công cụ AI để trao đổi";
                     chatBody.appendChild(botMessage);
                 }, 1000);
           
