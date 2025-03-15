@@ -3,657 +3,754 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Source Code - Khóa học lập trình</title>
+    <title>🔥 CodeXpert - Nguồn Code Chất Lượng</title>
     
-    <script src="js/script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <script src="js/search.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            position: relative;
-        }
-        .card {
-            margin-bottom: 20px;
-        }
-        .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease-in-out;
-        }
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        footer {
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: white;
-            padding: 40px 0;
-        }
-        footer a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
         }
 
-
-        .chat-call-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        .chat-bubble {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-        }
-        .chat-bubble.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .chat-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: auto;
-            padding: 10px;
-            border-radius: 25px;
-            background: #007bff;
-            color: white;
-            font-size: 18px;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            animation: shake 1s infinite;
-        }
-        .chat-button i {
-            margin-right: 5px;
-        }
-        .chat-button:hover {
-            background: #0056b3;
-        }
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            50% { transform: translateX(3px); }
-            75% { transform: translateX(-3px); }
-            100% { transform: translateX(0); }
-        }
-        .chat-window {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-        }
-        .chat-header {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .close-chat {
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .chat-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .chat-input {
-            display: flex;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .chat-input button {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .blinking-text {
-            animation: blink 0.5s infinite;
-            color: rgb(255, 133, 18);
-        }
-        @keyframes marquee {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-        .marquee-text {
-            white-space: nowrap;
-            overflow: hidden;
-            display: block;
-            width: 100%;
-            animation: marquee 20s linear infinite;
-            color: rgb(255, 0, 0);
-            font-size: 18px;
-            font-weight: bold;
-        }
-        @keyframes marque {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-        .marquee-tex {
-            white-space: nowrap;
-            overflow: hidden;
-            display: block;
-            width: 100%;
-            animation: marque 15s linear infinite;
-            color: rgb(255, 0, 0);
-            font-size: 18px;
-            font-weight: bold;
-        }
+        /* Splash Screen */
         .splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            color: white;
-            flex-direction: column;
-            z-index: 1000;
-            
+            z-index: 2000;
+            transition: opacity 0.5s ease-out;
         }
-  
         .splash-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            color: black;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
         .splash-content img {
-            width: 150px;
-            border-radius: 50% ;
-           
-            
+            width: 120px;
+            border-radius: 50%;
+            border: 3px solid #ff6b6b;
         }
-        .navbar-brand {
-    position: relative;
-    display: inline-block;
-    font-size: 1.3rem;
-    font-weight: bold;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-  
-    color: rgb(255, 234, 0);
-}
+        .splash-content h2 {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
 
-.navbar-brand::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 3px;
-    background-color: white;
-    transition: width 0.3s ease-in-out;
-}
-
-.navbar-brand:hover {
-    color: #ff0000;
-    transform: scale(1.1) translateY(-3px); /* Phóng to 10% và di chuyển lên 3px */
-}
-
-.navbar-brand:hover::after {
-    width: 100%;
-}
-
-.banner {
-            background: rgba(255, 255, 255, 0.2);
-            
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
+        /* Banner */
+        .banner {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
         }
-
-        .hidden {
-            display: none;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .modal-header {
-            border-bottom: none;
-        }
-
-        .modal-body input {
-            border-radius: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .btn-custom {
-            border-radius: 20px;
-            padding: 10px;
+        .rainbow-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin: 0;
         }
         .logo {
-            width: 50px; /* Điều chỉnh kích thước */
-    height: auto;
-    border-radius: 10px; /* Bo góc nhẹ để đẹp hơn */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
-}
-@keyframes rainbow {
-    0% { color: red; }
-    14% { color: orange; }
-    28% { color: yellow; }
-    42% { color: green; }
-    57% { color: blue; }
-    71% { color: indigo; }
-    85% { color: violet; }
-    100% { color: red; }
-}
+            width: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 0.5rem;
+        }
 
-.rainbow-text {
-    font-size: 1.9rem;
-    white-space: nowrap;
-    font-weight: bold;
-    animation: rainbow 2s infinite linear;
-}
-.navbar .navbar-brand {
-        margin-right: 9px; /* Giảm khoảng cách giữa các mục */
-        font-size: 22px; /* Tăng hoặc giảm kích thước chữ */
-    }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            padding: 3rem 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        header img {
+            border: 4px solid #fff;
+            transition: transform 0.3s ease;
+        }
+        header img:hover {
+            transform: scale(1.05);
+        }
+        header h1 {
+            font-weight: 700;
+            color: #fff;
+        }
+        header p {
+            color: #dfe6e9;
+        }
 
-    #balanceSection {
-        background: #fff;
-        padding: 5px 15px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-    }
+        /* Navbar */
+        .navbar {
+            background: #3498db !important;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #fff !important;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+        .navbar-brand:hover {
+            color: #ffeb3b !important;
+            transform: scale(1.05);
+        }
+        #balanceSection {
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        #balanceSection span {
+            color: #28a745;
+            font-weight: 600;
+        }
 
-    #balanceSection span {
-        color: #28a745;
-        font-size: 16px;
-        font-weight: bold;
-        margin-left: 5px;
-    }
+        /* Marquee */
+        .marquee-text, .marquee-tex {
+            background: rgba(255, 0, 0, 0.05);
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: #e74c3c;
+            font-weight: 500;
+            animation: marquee 15s linear infinite;
+            margin-bottom: 0.5rem;
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
 
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+        aside h2 {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        .category-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin-bottom: 0.3rem;
+        }
+        .category-links a:hover {
+            background: #3498db;
+            color: #fff;
+        }
+        .blinking-text {
+            color: #ff6b6b;
+            font-weight: 600;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+        .btn-primary {
+            background: #e74c3c;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        .modal-title {
+            font-weight: 600;
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: scale(1.05);
+        }
+        .form-control {
+            border-radius: 25px;
+            padding: 0.6rem;
+        }
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 2rem 0;
+            border-radius: 20px 20px 0 0;
+        }
+        footer a {
+            color: #ffeb3b;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Chat */
+        .chat-call-container {
+            position: fixed; /* Giữ cố định khi cuộn */
+            bottom: 20px; /* Cách đáy 20px */
+            right: 20px; /* Cách phải 20px */
+            z-index: 1000; /* Đảm bảo hiển thị trên các phần tử khác */
+        }
+        .chat-bubble {
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.5rem;
+            transition: all 0.5s ease-in-out;
+        }
+        .chat-bubble.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .chat-button {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .chat-button:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        .chat-window {
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 400px;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #fff;
+            display: none;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: #3498db;
+            border-radius: 12px 12px 0 0;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-chat {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background: #f1f1f1;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+        .bot-message {
+            background: #e9ecef;
+            margin-left: 20px;
+        }
+        .user-message {
+            background: #3498db;
+            color: #fff;
+            margin-right: 20px;
+            align-self: flex-end;
+        }
+        .chat-input {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 5px;
+        }
+        #chat-input {
+            flex: 1;
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+        #send-button {
+            border-radius: 20px;
+            padding: 5px 15px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background: #c0392b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-img-top {
+                height: 140px;
+            }
+            .chat-window {
+                width: 90%;
+                height: 70vh;
+            }
+            .banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .banner .btn {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Button Styles (Based on Image) */
+        .btn-warning {
+            background-color: #ffc107 !important;
+            color: #fff !important;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        .btn-success {
+            background-color: #28a745 !important;
+            color: #fff !important;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        .btn-danger {
+            background-color: #dc3545 !important;
+            color: #fff !important;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            display: none; /* Ẩn mặc định */
+        }
+        #welcomeSection.logged-in .btn-danger {
+            display: inline-block; /* Hiển thị khi đã đăng nhập */
+        }
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
         <div class="splash-content">
             <img src="img/anhdat.jpg" alt="Ảnh của bạn">
-            <h2>💡Coding Repository💡</h2>
-            <p>Web đang trong quá trình hoàn thiện❗❗❗</p>
-            <p style="color: red; font-size: 20px;">Web phục vụ cho quá trình học tập Mn tải về tham khảo</p>
+            <h2>💡 Coding Repository</h2>
+            <p>Web đang trong quá trình hoàn thiện ❗</p>
+            <p style="color: #e74c3c; font-weight: 500;">Web phục vụ học tập - Tải về tham khảo nhé!</p>
         </div>
     </div>
-<!-- banner -->
 
- <!-- Banner -->
- <div class="container mt-3">
-    <div class="banner p-3 d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-            <img src="img/logo.png" alt="Logo" class="logo me-2">
-            <h3 class="m-0 rainbow-text" style="font-size: 1.9rem;
-    white-space: nowrap;">🔥CodeXpert🔥</h3>
-        </div>
-        <div id="userSection">
-            <button class="btn btn-warning btn-custom" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
-            <button class="btn btn-success btn-custom" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
-        </div>
-        <div id="welcomeSection" class="hidden">
-            <span id="welcomeMessage" class="me-3"></span>
-            <button onclick="logout()" class="btn btn-danger btn-custom">Đăng Xuất</button>
-           
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Modal Đăng Ký -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-dark">
-            <div class="modal-header">
-                <h5 class="modal-title">Đăng Ký</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- Banner -->
+    <div class="container mt-3">
+        <div class="banner d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <img src="img/logo.png" alt="Logo" class="logo me-2">
+                <h3 class="rainbow-text m-0">🔥 CodeXpert</h3>
             </div>
-            <div class="modal-body">
-                <input type="text" id="regUsername" class="form-control mb-2" placeholder="Tên đăng nhập">
-                <input type="password" id="regPassword" class="form-control mb-2" placeholder="Mật khẩu">
-                <p id="registerError" class="text-danger d-none"></p> <!-- Thông báo lỗi -->
-                <button onclick="register()" class="btn btn-primary w-100 btn-custom">Đăng Ký</button>
+            <div id="userSection" class="d-flex align-items-center">
+                <button class="btn btn-warning btn-custom me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
+                <button class="btn btn-success btn-custom" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
+            </div>
+            <div id="welcomeSection" class="d-flex align-items-center">
+                <span id="welcomeMessage" class="me-3"></span>
+                <button id="logoutButton" onclick="logout()" class="btn btn-danger btn-custom">Đăng Xuất</button>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Đăng Nhập -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-dark">
-            <div class="modal-header">
-                <h5 class="modal-title">Đăng Nhập</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="loginUsername" class="form-control mb-2" placeholder="Tên đăng nhập">
-                <input type="password" id="loginPassword" class="form-control mb-2" placeholder="Mật khẩu">
-                <p id="loginError" class="text-danger d-none"></p> <!-- Thông báo lỗi -->
-                <button onclick="login()" class="btn btn-success w-100 btn-custom">Đăng Nhập</button>
+    <!-- Modals -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">🐰 Đăng Ký</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">👤</span>
+                        <input type="text" id="registerUsername" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🔒</span>
+                        <input type="password" id="registerPassword" class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🔑</span>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <p id="registerError" class="text-danger d-none"></p>
+                    <button onclick="register()" class="btn btn-custom w-100" style="background: #ff6b6b; color: #fff;">🎀 Đăng Ký</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-    <canvas class="fireworks"></canvas>
-    <header class="bg-dark text-white text-center py-4">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">🐰 Đăng Nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">👤</span>
+                        <input type="text" id="loginUsername" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🔒</span>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <p id="loginError" class="text-danger d-none"></p>
+                    <button onclick="login()" class="btn btn-custom w-100" style="background: #ff6b6b; color: #fff;">🎀 Đăng Nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">💰 Nạp Tiền</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="img/qr1.jpg" alt="QR Code" class="rounded mb-3" width="150">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🔑</span>
+                        <input type="text" id="depositCode" class="form-control" placeholder="Nhập mã code (VD: NAPTIEN123)">
+                    </div>
+                    <p id="depositError" class="text-danger d-none"></p>
+                    <button onclick="confirmDeposit()" class="btn btn-custom w-100" style="background: #f87171; color: #fff;">💖 Nạp Ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">💸 Rút Tiền</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🏦</span>
+                        <input type="text" id="accountNumber" class="form-control" placeholder="Số tài khoản">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">🏦</span>
+                        <select id="bankName" class="form-control">
+                            <option value="" selected>Chọn ngân hàng</option>
+                            <option value="MB Bank">MB Bank</option>
+                            <option value="VCB">Vietcombank</option>
+                            <option value="MSB">MSB</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">💰</span>
+                        <input type="number" id="withdrawAmount" class="form-control" placeholder="Số tiền muốn rút">
+                    </div>
+                    <p id="withdrawError" class="text-danger d-none"></p>
+                    <button onclick="confirmWithdraw()" class="btn btn-custom w-100" style="background: #f87171; color: #fff;">🚀 Rút Ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrModalLabel">🎀 Quét Mã QR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Quét mã QR và nhập nội dung chuyển khoản để tải file.</p>
+                    <img src="img/qr1.jpg" alt="QR Code" class="img-fluid rounded mb-3" width="200">
+                    <input type="text" id="qrInput" class="form-control" placeholder="Nhập nội dung xác nhận...">
+                    <small class="text-muted d-block mt-2">💡 Gợi ý: <b>"MuaCode123"</b></small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">❌ Hủy</button>
+                    <button type="button" class="btn btn-primary btn-custom" onclick="validateQR()">✅ Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="text-white text-center">
         <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle mb-3" width="150">
+            <h1>Đạt - Backend Dev 💻</h1>
+            <p>Xin chào mọi người! Hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ.</p>
+            <p>Trang web này tạo ra để anh em Dev trao đổi kiến thức IT và tải source code chất lượng.</p>
         </div>
     </header>
-    
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container d-flex align-items-center">
-            <a class="navbar-brand" href="#">Trang chủ <i class="fa-solid fa-house-chimney"></i></a>
-            <a class="navbar-brand" href="hosting.html">Thuê hosting <i class="fa-solid fa-globe"></i></a>
-            <a class="navbar-brand" href="upload.html">Tải code lên <i class="fa-solid fa-cloud-arrow-up"></i></a>
-            <a class="navbar-brand" href="#" id="withdrawButton">Rút tiền <i class="fa-solid fa-money-check-dollar"></i></a>
-            <a class="navbar-brand" href="#" id="depositButton" onclick="openDeposit()">Nạp tiền <i class="fa-solid fa-money-check-dollar"></i></a>
-    
-            <!-- Phần số dư -->
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <a class="navbar-brand" href="#">Trang chủ <i class="fa-solid fa-house-chimney"></i></a>
+                <a class="navbar-brand" href="hosting.html">Thuê Hosting <i class="fa-solid fa-globe"></i></a>
+                <a class="navbar-brand" href="upload.html">Tải Code Lên <i class="fa-solid fa-cloud-arrow-up"></i></a>
+                <a class="navbar-brand" href="#" id="withdrawButton" onclick="openWithdraw()">Rút Tiền <i class="fa-solid fa-money-check-dollar"></i></a>
+                <a class="navbar-brand" href="#" id="depositButton" onclick="openDeposit()">Nạp Tiền <i class="fa-solid fa-money-check-dollar"></i></a>
+            </div>
             <div id="balanceSection">
                 <strong>Số dư:</strong> <span id="balance">0</span> VNĐ
             </div>
         </div>
     </nav>
-   
 
-<!-- Cửa sổ modal nhập mã nạp tiền -->
-<div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">💰 Nạp tiền</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p><strong>Quét mã QR hoặc nhập mã để nạp tiền:</strong></p>
-
-                <!-- Hình ảnh mã QR -->
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=NAPTIEN123" 
-                     alt="Mã QR nạp tiền" class="mb-3" width="150">
-
-                <p class="text-muted">(CK đúng nôi dung: <strong class="text-success">tên tài khoản của bạn</strong>, hệ thống sẽ cộng tiền tự động)</p>
-
-                <input type="text" id="depositCode" class="form-control mb-2 text-center" 
-                       placeholder="Nhập mã code...">
-
-                <p id="depositError" class="text-danger d-none"></p>
-
-                <button onclick="confirmDeposit()" class="btn btn-primary w-100">OK</button>
-            </div>
-        </div>
+    <!-- Marquee -->
+    <div class="container mt-3">
+        <p class="marquee-text">🔥 Sau khi tải code về liên hệ ZALO: 0339722095 hỗ trợ cài 🔥</p>
+        <p class="marquee-tex">🔥 Khi nạp tiền mà chưa nhận được code liên hệ ZALO ngay 🔥</p>
     </div>
-</div>
 
-
-
-
-<!-- Modal thông báo -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h5>🚧 Tính năng này chưa được cập nhật! 🚀</h5>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    <p class="marquee-text">🔥 Sau khi tải code về liên hệ ZALO: 0339722095 hỗ trợ cài 🔥</p>
-    <p class="marquee-tex">🔥 Khi nạp tiền mà chưa nhận dc code liên hệ ZALO ngay 🔥</p>
+    <!-- Main Content -->
     <main class="container mt-4">
         <div class="row">
             <aside class="col-md-3">
-                <h2 style="color: red;"><i class="fa-solid fa-list"></i> Danh mục Code</h2>
+                <h2><i class="fa-solid fa-list"></i> Danh Mục Code</h2>
                 <div class="category-links">
-                    <a href="adr.html" class="category-item">Android <i class="fa-brands fa-android"></i></a>
-                   
-                    <a href="html.html" class="category-item">HTML & Template <i class="fa-brands fa-html5"></i></a>
-                    <a href="php.html" class="category-item">PHP & MySQL <i class="fa-brands fa-php"></i></a>
-                    <a href="java.html" class="category-item">Java & SpringBoot <i class="fa-brands fa-java"></i></a>
-                    <a href="asp.html" class="category-item">ASP.NET</a>      
+                    <a href="adr.html">Android <i class="fa-brands fa-android"></i></a>
+                    <a href="html.html">HTML & Template <i class="fa-brands fa-html5"></i></a>
+                    <a href="php.html">PHP & MySQL <i class="fa-brands fa-php"></i></a>
+                    <a href="java.html">Java & SpringBoot <i class="fa-brands fa-java"></i></a>
+                    <a href="asp.html">ASP.NET</a>
                 </div>
-                <h2 class="blinking-text" style="color: red;">Khóa học lập trình <i class="fa-solid fa-fire"></i></h2>
+                <h2 class="blinking-text"><i class="fa-solid fa-fire"></i> Khóa Học Lập Trình</h2>
                 <div class="category-links">
-                    <a href="khoahoc.html" class="category-item" style="color: yellow;">WEB BACKEND JAVA (28Tech)</a>
-                
+                    <a href="khoahoc.html" style="color: #e74c3c;">WEB BACKEND JAVA (28Tech)</a>
+                    <a href="https://28tech.com.vn/lap-trinh-fullstack" style="color: #e74c3c;">Lập Trình FullStack (28Tech)</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1uUol6oyY5W41z5fm0jTMP_Q92r40vUzk/edit?gid=1803878187#gid=1803878187" style="color: #e74c3c;">Luyện Thi TOEIC (Cô Mai Phương)</a>
                 </div>
+                <h2 class="blinking-text"><i class="fa-solid fa-robot"></i> Công Cụ AI</h2>
                 <div class="category-links">
-                    <a href="https://28tech.com.vn/lap-trinh-fullstack" class="category-item" style="color: yellow;">Lập trình FullStack (28Tech)🏆</a>
-                
+                    <a href="ai.html" style="color: #e74c3c;">AI (Bản thử nghiệm)</a>
                 </div>
-                <div class="category-links">
-                    <a href="https://docs.google.com/spreadsheets/d/1uUol6oyY5W41z5fm0jTMP_Q92r40vUzk/edit?gid=1803878187#gid=1803878187" class="category-item" style="color: yellow;">Luyện thi TOEIC (Cô Mai Phương)🏆</a>
-                
-                </div>
-                <h2 class="blinking-text" style="color: red;">Công cụ AI🔥</h2>
-                <div class="category-links">
-                    <a href="ai.html" class="category-item" style="color: yellow;">AI (bản thử nghiệm) <i class="fa-solid fa-robot"></i></br>Chưa được tối ưu</a>
-                   
-                </div>
-                
             </aside>
-            
-            
-            
-            
+
             <section class="col-md-9">
-                
-                <h2 class="blinking-text">Source Code Mới Nhất🎉
-                    
-                </h2>
-                
+                <h2 class="blinking-text">Source Code Mới Nhất 🎉</h2>
                 <div class="row">
-
                     <div class="col-md-4">
-                        <a href="chitiet4.html" style="text-decoration: none; color: #1a1a1a;">
+                        <a href="chitiet4.html" style="text-decoration: none; color: #333;">
                             <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141741.jpg" class="card-img-top" alt="Code Android">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Ứng dụng nghe nhạc FREE code chuẩn, dễ hiểu, có video</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/10IuNcgswja7AgSxpsw_Sz5lfhkX10QlA/view" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
-                                <a href="https://drive.google.com/file/d/1IG46LCjf2bBtiA6BaFujml53DONST1d4/view" class="btn btn-primary d-block mt-2">Tải ngay <i class="fa-solid fa-download"></i></a>
+                                <img src="https://sharecode.vn/FilesUpload/Code/sharecode-2025-ung-dung-nghe-nhac-free-code-chuan-de-hieu-co-video-141741.jpg" class="card-img-top" alt="Code Android">
+                                <div class="card-body">
+                                    <h5 class="card-title">Android</h5>
+                                    <p class="card-text">Ứng dụng nghe nhạc FREE code chuẩn, dễ hiểu, có video</p>
+                                    <span class="price">Free</span>
+                                    <a href="https://drive.google.com/file/d/10IuNcgswja7AgSxpsw_Sz5lfhkX10QlA/view" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                    <a href="https://drive.google.com/file/d/1IG46LCjf2bBtiA6BaFujml53DONST1d4/view" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
+                                </div>
                             </div>
-                        </div>
                         </a>
-                        
                     </div>
 
                     <div class="col-md-4">
-                        <a href="chitiet3.html" style="text-decoration: none; color: #1a1a1a;">
+                        <a href="chitiet3.html" style="text-decoration: none; color: #333;">
                             <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/full-code-web-ban-sach-online-bang-asp.net-mvc-114655.jpg" class="card-img-top" alt="Code Android">
-                            <div class="card-body">
-                                <h5 class="card-title">ASP/ASP.NET</h5>
-                                <p class="card-text">Full code web bán sách online bằng ASP.Net MVC</p>
-                                <span class="price text-danger fw-bold">50.000đ</span>
-                                <a style="background-color: rgb(255, 0, 0);" href="https://rr1---sn-5hne6nz6.googlevideo.com/videoplayback?expire=1741773235&ei=UwXRZ-nqN6TQ6dsPp--IgAg&ip=145.14.139.155&id=o-AFcPKsbUDQSZOG7gQiOwZQFOn2pZQI-iZ6i5DhdPECJZ&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&bui=AUWDL3yjCK6I9GKEq15S33Ia7Wmprs0CuB4Ay3LdcylX05oSiQZUybzUp3DuxSyI3Wwg0G5VWy3FHhyT&spc=RjZbSXg-Iezhu507YfsFlm00Hdxkt_Jt_iEN30_SHLnRr2HzqaQ3ec9SEx_-rhDySlE&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=805928&ratebypass=yes&dur=35.085&lmt=1711082153468840&fexp=24350590,24350737,24350827,24350961,24351147,24351173,24351206,24351276,24351283,24351347,24351349,24351377,51326932,51358317,51411872&c=ANDROID&txp=6209224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIhAOyJWiYzZgA8fsk31wsI3l_v-G3GPs4-4NDJfXYR-5vRAiBkd1s7um35tbr1hD8u-ErXEq_dWGryLEQeBaRrgrCKHw%3D%3D&title=Source+web+B%C3%81N+S%C3%81CH+Asp.net+MVC&redirect_counter=1&cm2rm=sn-4g5edz76&rrc=80&req_id=d204c96a3caca3ee&cms_redirect=yes&cmsv=e&met=1741751642,&mh=an&mip=2405:4802:1bee:4f10:464:d0f3:6329:91da&mm=34&mn=sn-5hne6nz6&ms=ltu&mt=1741750982&mv=D&mvi=1&pl=0&rms=ltu,au&lsparams=met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=AFVRHeAwRAIgXX7PW3S7uj6_ZuKRsg-z_t0kVqWWFQeZ4rCcCh_9FcQCIG_JQhGvlUafFy8oZRvwhCYBHsB_PBiyhpS0uef3ajrp" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <img src="https://sharecode.vn/FilesUpload/Code/full-code-web-ban-sach-online-bang-asp.net-mvc-114655.jpg" class="card-img-top" alt="Code Android">
+                                <div class="card-body">
+                                    <h5 class="card-title">ASP/ASP.NET</h5>
+                                    <p class="card-text">Full code web bán sách online bằng ASP.Net MVC</p>
+                                    <span class="price">50.000đ</span>
+                                    <a href="https://rr1---sn-5hne6nz6.googlevideo.com/videoplayback?..." target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                    <a href="#" class="btn btn-primary d-block mt-2" onclick="showQRModal('download-shop.zip')">📥 Mua Ngay</a>
+                                </div>
                             </div>
-                        </div>
                         </a>
-                        
                     </div>
 
                     <div class="col-md-4">
-                        <a href="chitiet.html" style="text-decoration: none; color: #1a1a1a;">
+                        <a href="chitiet.html" style="text-decoration: none; color: #333;">
                             <div class="card">
-                            <img src="img/g1.jpg" class="card-img-top" alt="Code Android">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Source code game Phiêu Lưu & Giải Đố - Beone</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/113UqlCgv3Gmcs7Qe3XW8d9ZJObN1pIhJ/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-                                <a href="https://drive.google.com/file/d/1b1UUdMogkWYG8Rrv9Jd2A_kELI4KQWOC/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <img src="img/g1.jpg" class="card-img-top" alt="Code Android">
+                                <div class="card-body">
+                                    <h5 class="card-title">Android</h5>
+                                    <p class="card-text">Source code game Phiêu Lưu & Giải Đố - Beone</p>
+                                    <span class="price">Free</span>
+                                    <a href="https://drive.google.com/file/d/113UqlCgv3Gmcs7Qe3XW8d9ZJObN1pIhJ/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                    <a href="https://drive.google.com/file/d/1b1UUdMogkWYG8Rrv9Jd2A_kELI4KQWOC/view" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
+                                </div>
                             </div>
-                        </div>
                         </a>
-                        
                     </div>
+
                     <div class="col-md-4">
-                        <a href="chitiet2.html" style="text-decoration: none; color: #1a1a1a;">
+                        <a href="chitiet2.html" style="text-decoration: none; color: #333;">
                             <div class="card">
-                            <img src="img/g2.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Code App game tính toán android đơn giản</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1rr5Sg8VRJOLrgLLvYqREDmj8oBpiji4C/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-                                <a href="https://drive.google.com/file/d/1NPnQ4YhLs_5UYO83-2_uV9gxIg6HZo3j/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <img src="img/g2.jpg" class="card-img-top" alt="Code React Native">
+                                <div class="card-body">
+                                    <h5 class="card-title">Android</h5>
+                                    <p class="card-text">Code App game tính toán android đơn giản</p>
+                                    <span class="price">Free</span>
+                                    <a href="https://drive.google.com/file/d/1rr5Sg8VRJOLrgLLvYqREDmj8oBpiji4C/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                    <a href="https://drive.google.com/file/d/1NPnQ4YhLs_5UYO83-2_uV9gxIg6HZo3j/view" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
+                                </div>
                             </div>
-                        </div>
                         </a>
-                        
                     </div>
+
                     <div class="col-md-4">
                         <div class="card">
                             <img src="img/g3.jpg" class="card-img-top" alt="Code React Native">
                             <div class="card-body">
                                 <h5 class="card-title">Android</h5>
                                 <p class="card-text">Đua Pokemon - Pokemon Crossing source code</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a style="background-color: rgb(255, 0, 0);" href="https://drive.google.com/file/d/1y9exw4MyEUnYP9rw_7qwWGcq4cbaR0uO/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-
-                                <a href="https://www.mediafire.com/file/mfpcq6b6h6rebgg/MiniGame.rar/file" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <span class="price">Free</span>
+                                <a href="https://drive.google.com/file/d/1y9exw4MyEUnYP9rw_7qwWGcq4cbaR0uO/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                <a href="https://www.mediafire.com/file/mfpcq6b6h6rebgg/MiniGame.rar/file" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card">
                             <img src="img/g4.jpg" class="card-img-top" alt="Code React Native">
                             <div class="card-body">
                                 <h5 class="card-title">Android</h5>
                                 <p class="card-text">Candy Jump + Admob + Multiple Characters</p>
-                                <span class="price text-danger fw-bold">450.000đ</span>
-
-                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dDUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <span class="price">450.000đ</span>
+                                <a href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dDUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card">
                             <img src="img/g5.jpg" class="card-img-top" alt="Code React Native">
                             <div class="card-body">
                                 <h5 class="card-title">Android</h5>
                                 <p class="card-text">Jet Pack Pig - full game android source code</p>
-                                <span class="price text-danger fw-bold">300.000đ</span>
-                                <a style="background-color: rgb(255, 0, 0);"href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo</a>
-
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <span class="price">300.000đ</span>
+                                <a href="https://drive.google.com/file/d/1kiKGAmukX8nKuc01cBOzshOkoK6dUt6/view?usp=sharing" target="_blank" class="btn btn-primary d-block mt-2">Xem Video Demo <i class="fa-solid fa-circle-play"></i></a>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                         <div class="card">
                             <img src="img/g6.jpg" class="card-img-top" alt="Code React Native">
                             <div class="card-body">
                                 <h5 class="card-title">PHP & MySQL</h5>
-                                <p class="card-text">Full code website cửa hàng thời trang tối giản chuẩn SEO cập nhật </p>
-                                <span class="price text-danger fw-bold">250.000đ</span>
-                                <a style="background-color: red;" href="https://woodmart.xtemos.com/demo-fashion-minimalism/demo/fashion-minimalism/" class="btn btn-primary d-block mt-2">Demo Web</a>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <p class="card-text">Full code website cửa hàng thời trang tối giản chuẩn SEO cập nhật</p>
+                                <span class="price">250.000đ</span>
+                                <a href="https://woodmart.xtemos.com/demo-fashion-minimalism/demo/fashion-minimalism/" target="_blank" class="btn btn-primary d-block mt-2">Demo Web</a>
+                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải Ngay <i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item active"><a class="page-link" href="index.html">1</a></li>
+                        <li class="page-item"><a class="page-link" href="page2.html">2</a></li>
+                    </ul>
+                </nav>
             </section>
-            
         </div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item active"><a class="page-link" href="index.html">1</a></li>
-                <li class="page-item"><a class="page-link" href="page2.html">2</a></li>
-            </ul>
-        </nav>
-        
     </main>
-    
+
+    <!-- Footer -->
     <footer class="text-white text-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>Về Chợ Code</h5>
+                    <h5>Về CodeXpert</h5>
                     <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
                     <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
                     <p>Email: phamtiendat21072004@gmail.com</p>
                 </div>
                 <div class="col-md-4">
-                    <h5>Liên kết nhanh</h5>
+                    <h5>Liên Kết Nhanh</h5>
                     <ul class="list-unstyled">
                         <li><a href="#">Trang chủ</a></li>
                         <li><a href="#">Danh mục</a></li>
@@ -662,7 +759,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5>Kết nối với chúng tôi</h5>
+                    <h5>Kết Nối Với Chúng Tôi</h5>
                     <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
                     <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
                     <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
@@ -670,263 +767,333 @@
             </div>
         </div>
     </footer>
-  <!-- sdt -->
-  <div class="chat-call-container">
-    <div class="chat-bubble" id="chat-message">Xin chào!</div>
-    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
-    
-    <div class="chat-button" id="chat-button" >
-        <i class="fa-regular fa-comments"></i> Chat
-    </div>
-    <div class="chat-button" id="call-button" style="background-color: lime;">
-        <i class="fa-solid fa-phone"></i> Gọi
-    </div>
-</div>
 
-<div class="chat-window" id="chat-window">
-    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
-    <div class="chat-body" id="chat-body"></div>
-    <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
-        <button id="send-button">Gửi</button>
-    </div>
-</div>
-
-
-<script>
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    let savedUser = localStorage.getItem("username");
-    let isLoggedIn = localStorage.getItem("isLoggedIn");
-    let balance = parseInt(localStorage.getItem("balance")) || 0; // Lấy số dư từ localStorage hoặc mặc định là 0
-
-    document.getElementById("balance").textContent = balance;
-
-    if (savedUser && isLoggedIn === "true") {
-        showUser(savedUser);
-    }
-});
-
-function openDeposit() {
-    let isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (isLoggedIn !== "true") {
-        alert("⚠️ Vui lòng đăng nhập để nạp tiền!");
-        return;
-    }
-
-    let depositModal = new bootstrap.Modal(document.getElementById("depositModal"));
-    depositModal.show();
-}
-
-function confirmDeposit() {
-    let code = document.getElementById("depositCode").value.trim();
-    let depositError = document.getElementById("depositError");
-
-    if (code !== "NAPTIEN123") {
-        depositError.textContent = "⚠️ Mã code không hợp lệ!";
-        depositError.classList.remove("d-none", "text-success");
-        depositError.classList.add("text-danger");
-        return;
-    }
-
-    // Cộng tiền nếu mã hợp lệ
-    let currentBalance = parseInt(localStorage.getItem("balance")) || 0;
-    let newBalance = currentBalance + 10000;
-    localStorage.setItem("balance", newBalance);
-    document.getElementById("balance").textContent = newBalance;
-
-    // Hiển thị thông báo nạp thành công
-    depositError.textContent = "✅ Nạp tiền thành công! +10.000 VNĐ";
-    depositError.classList.remove("d-none", "text-danger");
-    depositError.classList.add("text-success");
-
-    // Tự động đóng modal sau 1.5s
-    setTimeout(() => {
-        let depositModal = bootstrap.Modal.getInstance(document.getElementById("depositModal"));
-        depositModal.hide();
-    }, 1500);
-}
-
-</script>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    let savedUser = localStorage.getItem("username");
-    let isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (savedUser && isLoggedIn === "true") {
-        showUser(savedUser);
-    }
-});
-
-function register() {
-    let user = document.getElementById("regUsername").value.trim();
-    let pass = document.getElementById("regPassword").value.trim();
-    let registerError = document.getElementById("registerError");
-
-    if (!user || !pass) {
-        registerError.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin!";
-        registerError.classList.remove("d-none");
-        return;
-    }
-
-    if (localStorage.getItem("username") === user) {
-        registerError.textContent = "⚠️ Tên đăng nhập đã tồn tại!";
-        registerError.classList.remove("d-none");
-        return;
-    }
-
-    localStorage.setItem("username", user);
-    localStorage.setItem("password", pass);
-
-    registerError.textContent = "🎉 Đăng ký thành công! Đang chuyển...";
-    registerError.classList.remove("text-danger");
-    registerError.classList.add("text-success");
-    registerError.classList.remove("d-none");
-
-    setTimeout(() => {
-        var registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-        registerModal.hide();
-        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
-    }, 1500);
-}
-
-function login() {
-    let user = document.getElementById("loginUsername").value.trim();
-    let pass = document.getElementById("loginPassword").value.trim();
-    let savedUser = localStorage.getItem("username");
-    let savedPass = localStorage.getItem("password");
-    let loginError = document.getElementById("loginError");
-
-    if (!user || !pass) {
-        loginError.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin!";
-        loginError.classList.remove("d-none");
-        return;
-    }
-
-    if (user === savedUser && pass === savedPass) {
-        localStorage.setItem("isLoggedIn", "true");
-
-        loginError.textContent = "✅ Đăng nhập thành công! Đang tải lại...";
-        loginError.classList.remove("text-danger");
-        loginError.classList.add("text-success");
-        loginError.classList.remove("d-none");
-
-        setTimeout(() => {
-            location.reload();
-        }, 1500);
-    } else {
-        loginError.textContent = "⚠️ Sai tài khoản hoặc mật khẩu!";
-        loginError.classList.remove("d-none");
-    }
-}
-
-function showUser(user) {
-    document.getElementById("userSection").classList.add("hidden");
-    document.getElementById("welcomeSection").classList.remove("hidden");
-    document.getElementById("welcomeMessage").innerText = `👋 Xin chào, ${user}`;
-}
-
-function logout() {
-    localStorage.removeItem("isLoggedIn"); // Xóa trạng thái đăng nhập
-    localStorage.setItem("balance", "0"); // Đặt số dư về 0
-    document.getElementById("balance").textContent = "0"; // Cập nhật giao diện
-
-    alert("🚪 Đăng xuất thành công!");
-    location.reload(); // Load lại trang
-}
-
-
-
-</script>
-
-
-<script>
-    document.getElementById("withdrawButton").addEventListener("click", function(event) {
-        event.preventDefault(); // Ngăn chặn chuyển trang
-
-        var modal = new bootstrap.Modal(document.getElementById('updateModal'));
-        modal.show();
-
-        // Ẩn modal sau 2 giây
-        setTimeout(() => { modal.hide(); }, 2000);
-    });
-</script>
-
-    <script>
-         function searchFunction() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let cards = document.querySelectorAll("#productList .col-md-4");
-    cards.forEach(card => {
-        let title = card.querySelector(".card-title").innerText.toLowerCase();
-        let text = card.querySelector(".card-text").innerText.toLowerCase();
-        if (title.includes(input) || text.includes(input)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
-}
-
-window.onload = function() {
-    let splashScreen = document.getElementById("splashScreen");
-
-    // Kiểm tra nếu đã hiển thị splash screen trước đó chưa
-    if (!sessionStorage.getItem("splashShown")) {
-        splashScreen.style.display = "flex"; // Hiện splash screen
-        setTimeout(function() {
-            splashScreen.style.display = "none";
-            sessionStorage.setItem("splashShown", "true"); // Đánh dấu đã hiển thị
-        }, 3000);
-    } else {
-        splashScreen.style.display = "none"; // Nếu đã hiển thị trước đó, ẩn luôn
-    }
-};
-
-
-    </script>
-    <script>
+    <!-- Chat -->
+    <div class="chat-call-container">
         
-        document.addEventListener("DOMContentLoaded", function() {
+       
+        <div class="chat-button" id="chat-button"><i class="fa-regular fa-comments"></i></div>
+        <div class="chat-button" id="call-button" style="background: #2ecc71;"><i class="fa-solid fa-phone"></i></div>
+    </div>
+
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">×</span></div>
+        <div class="chat-body" id="chat-body"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+            <button id="send-button">Gửi</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let balance = localStorage.getItem("balance") || 0;
+            document.getElementById("balance").textContent = balance;
+
+            let savedUser = localStorage.getItem("username");
+            let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+            // Kiểm tra trạng thái đăng nhập để hiển thị giao diện phù hợp
+            let userSection = document.getElementById("userSection");
+            let welcomeSection = document.getElementById("welcomeSection");
+            let welcomeMessage = document.getElementById("welcomeMessage");
+
+            if (savedUser && isLoggedIn === "true") {
+                userSection.style.display = "none";
+                welcomeSection.style.display = "flex";
+                welcomeSection.classList.add("logged-in");
+                welcomeMessage.textContent = `👋 Xin chào, ${savedUser}`;
+            } else {
+                userSection.style.display = "flex";
+                welcomeSection.style.display = "none";
+                welcomeMessage.textContent = "";
+                welcomeSection.classList.remove("logged-in");
+            }
+
+            let splashScreen = document.getElementById("splashScreen");
+            if (!sessionStorage.getItem("splashShown")) {
+                splashScreen.style.display = "flex";
+                setTimeout(function() {
+                    splashScreen.style.opacity = "0";
+                    setTimeout(() => {
+                        splashScreen.style.display = "none";
+                        sessionStorage.setItem("splashShown", "true");
+                    }, 500);
+                }, 3000);
+            } else {
+                splashScreen.style.display = "none";
+            }
+
+            // Chatbot logic
+            const chatBody = document.getElementById("chat-body");
+            const chatInput = document.getElementById("chat-input");
+            const sendButton = document.getElementById("send-button");
+            const chatWindow = document.getElementById("chat-window");
+
+            // Mở cửa sổ chat
+            document.getElementById("chat-button").addEventListener("click", function() {
+                chatWindow.style.display = "flex";
+                addMessage("Bot: Chào bạn! Tôi là chatbot của CodeXpert. Bạn cần hỗ trợ gì? 😊", "bot");
+            });
+
+            // Đóng cửa sổ chat
+            document.getElementById("close-chat").addEventListener("click", function() {
+                chatWindow.style.display = "none";
+            });
+
+            // Gửi tin nhắn
+            sendButton.addEventListener("click", sendMessage);
+            chatInput.addEventListener("keypress", function(e) {
+                if (e.key === "Enter") sendMessage();
+            });
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message === "") return;
+
+                // Hiển thị tin nhắn của người dùng
+                addMessage(`Bạn: ${message}`, "user");
+                chatInput.value = "";
+
+                // Phản hồi của bot
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(`Bot: ${response}`, "bot");
+                }, 500);
+            }
+
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("chat-message", `${sender}-message`);
+                messageDiv.textContent = text;
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            function getBotResponse(message) {
+                message = message.toLowerCase();
+
+                if (message.includes("chào") || message.includes("hi")) {
+                    return "Chào bạn! Rất vui được trò chuyện với bạn. Bạn cần giúp gì không?";
+                } else if (message.includes("code") || message.includes("source")) {
+                    return "Bạn muốn tải source code à? Vui lòng xem danh mục code hoặc liên hệ Zalo 0339722095 để được hỗ trợ!";
+                } else if (message.includes("nạp tiền") || message.includes("deposit")) {
+                    return "Để nạp tiền, hãy nhấp vào nút 'Nạp Tiền' và quét mã QR với mã code 'NAPTIEN123'. Cần hỗ trợ thêm không?";
+                } else if (message.includes("rút tiền") || message.includes("withdraw")) {
+                    return "Để rút tiền, hãy nhấp vào 'Rút Tiền' và điền thông tin tài khoản. Đảm bảo số dư đủ nhé!";
+                } else if (message.includes("giúp") || message.includes("help")) {
+                    return "Tôi có thể giúp bạn với: nạp/rút tiền, tìm code, hoặc hỗ trợ cài đặt. Bạn muốn hỏi gì cụ thể?";
+                } else {
+                    return "Xin lỗi, tôi chưa hiểu ý bạn. Hãy thử hỏi lại hoặc liên hệ Zalo 0339722095 để được hỗ trợ nhé!";
+                }
+            }
+
+            // Hiển thị tin nhắn chào ban đầu sau 2 giây
             setTimeout(() => {
                 document.getElementById("chat-message").classList.add("show");
-            }, 500);
-            setTimeout(() => {
-                document.getElementById("call-message").classList.add("show");
-            }, 1000);
+            }, 2000);
         });
-        
-        document.getElementById("chat-button").addEventListener("click", function() {
-            const chatWindow = document.getElementById("chat-window");
-            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
-        });
-        
-        document.getElementById("close-chat").addEventListener("click", function() {
-            document.getElementById("chat-window").style.display = "none";
-        });
-        
-        document.getElementById("send-button").addEventListener("click", function() {
-            const input = document.getElementById("chat-input");
-            const message = input.value.trim();
-            if (message) {
-                const chatBody = document.getElementById("chat-body");
-                const userMessage = document.createElement("div");
-                userMessage.textContent = "Bạn: " + message;
-                chatBody.appendChild(userMessage);
-                input.value = "";
-                
-                setTimeout(() => {
-                    const botMessage = document.createElement("div");
-                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Bạn vui lòng vào công cụ AI để trao đổi";
-                    chatBody.appendChild(botMessage);
-                }, 1000);
-          
+
+        function openDeposit() {
+            let isLoggedIn = localStorage.getItem("isLoggedIn");
+            if (isLoggedIn !== "true") {
+                alert("⚠️ Vui lòng đăng nhập để nạp tiền!");
+                return;
             }
-        });
+            var depositModal = new bootstrap.Modal(document.getElementById("depositModal"));
+            depositModal.show();
+        }
+
+        function confirmDeposit() {
+            let code = document.getElementById("depositCode").value.trim();
+            let depositError = document.getElementById("depositError");
+
+            if (code !== "NAPTIEN123") {
+                depositError.textContent = "❌ Mã code không hợp lệ!";
+                depositError.classList.remove("d-none");
+                depositError.classList.add("text-danger");
+                return;
+            }
+
+            let currentBalance = parseInt(localStorage.getItem("balance") || "0");
+            let newBalance = currentBalance + 10;
+            localStorage.setItem("balance", newBalance);
+            document.getElementById("balance").textContent = newBalance;
+
+            depositError.textContent = "✅ Nạp tiền thành công! +10 VNĐ";
+            depositError.classList.remove("text-danger");
+            depositError.classList.add("text-success");
+            depositError.classList.remove("d-none");
+
+            setTimeout(() => {
+                var depositModal = bootstrap.Modal.getInstance(document.getElementById('depositModal'));
+                if (depositModal) {
+                    depositModal.hide();
+                }
+                document.body.classList.remove("modal-open");
+                document.querySelectorAll(".modal-backdrop").forEach(backdrop => backdrop.remove());
+            }, 1500);
+        }
+
+        function openWithdraw() {
+            let isLoggedIn = localStorage.getItem("isLoggedIn");
+            if (isLoggedIn !== "true") {
+                alert("⚠️ Vui lòng đăng nhập để rút tiền!");
+                return;
+            }
+            var withdrawModal = new bootstrap.Modal(document.getElementById("withdrawModal"));
+            withdrawModal.show();
+        }
+
+        function confirmWithdraw() {
+            let accountNumber = document.getElementById("accountNumber").value.trim();
+            let bankName = document.getElementById("bankName").value;
+            let amount = parseInt(document.getElementById("withdrawAmount").value.trim());
+            let balance = parseInt(localStorage.getItem("balance") || "0");
+            let withdrawError = document.getElementById("withdrawError");
+
+            if (!accountNumber || !bankName || isNaN(amount) || amount <= 0) {
+                withdrawError.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin!";
+                withdrawError.classList.remove("d-none");
+                return;
+            }
+
+            if (amount > balance) {
+                withdrawError.textContent = "⚠️ Tài khoản của bạn không đủ!";
+                withdrawError.classList.remove("d-none");
+                return;
+            }
+
+            let newBalance = balance - amount;
+            localStorage.setItem("balance", newBalance);
+            document.getElementById("balance").textContent = newBalance;
+
+            withdrawError.textContent = "✅ Hệ thống đang xử lý...";
+            withdrawError.classList.remove("text-danger");
+            withdrawError.classList.add("text-success");
+            withdrawError.classList.remove("d-none");
+
+            setTimeout(() => {
+                var withdrawModal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (withdrawModal) {
+                    withdrawModal.hide();
+                }
+                document.body.classList.remove("modal-open");
+                document.querySelectorAll(".modal-backdrop").forEach(backdrop => backdrop.remove());
+                location.reload();
+            }, 60);
+        }
+
+        function register() {
+            let username = document.getElementById("registerUsername").value.trim();
+            let password = document.getElementById("registerPassword").value.trim();
+            let confirmPassword = document.getElementById("confirmPassword").value.trim();
+            let registerError = document.getElementById("registerError");
+
+            if (username === "" || password === "" || confirmPassword === "") {
+                registerError.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin!";
+                registerError.classList.remove("d-none");
+                registerError.classList.add("text-danger");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                registerError.textContent = "❌ Mật khẩu không khớp!";
+                registerError.classList.remove("d-none");
+                registerError.classList.add("text-danger");
+                document.getElementById("registerModal").classList.add("shake");
+                setTimeout(() => {
+                    document.getElementById("registerModal").classList.remove("shake");
+                }, 500);
+                return;
+            }
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+
+            registerError.textContent = "✅ Đăng ký thành công! Chuyển sang đăng nhập...";
+            registerError.classList.remove("text-danger");
+            registerError.classList.add("text-success");
+            registerError.classList.remove("d-none");
+
+            setTimeout(() => {
+                var registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                registerModal.hide();
+                var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }, 1500);
+        }
+
+        function login() {
+            let username = document.getElementById("loginUsername").value.trim();
+            let password = document.getElementById("loginPassword").value.trim();
+            let loginError = document.getElementById("loginError");
+
+            let savedUser = localStorage.getItem("username");
+            let savedPass = localStorage.getItem("password");
+
+            if (username === savedUser && password === savedPass) {
+                localStorage.setItem("isLoggedIn", "true");
+
+                loginError.textContent = "✅ Đăng nhập thành công!";
+                loginError.classList.remove("text-danger");
+                loginError.classList.add("text-success");
+                loginError.classList.remove("d-none");
+
+                setTimeout(() => {
+                    var loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    if (loginModal) {
+                        loginModal.hide();
+                    }
+                    document.getElementById("userSection").style.display = "none";
+                    document.getElementById("welcomeSection").style.display = "flex";
+                    document.getElementById("welcomeSection").classList.add("logged-in");
+                    document.getElementById("welcomeMessage").textContent = `👋 Xin chào, ${username}`;
+                }, 1000);
+            } else {
+                loginError.textContent = "❌ Sai tên đăng nhập hoặc mật khẩu!";
+                loginError.classList.remove("d-none");
+                loginError.classList.add("text-danger");
+                document.getElementById("loginModal").classList.add("shake");
+                setTimeout(() => {
+                    document.getElementById("loginModal").classList.remove("shake");
+                }, 500);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.setItem("balance", "0");
+            document.getElementById("balance").textContent = "0";
+            alert("🚪 Đăng xuất thành công!");
+
+            // Đặt lại giao diện về trạng thái ban đầu
+            document.getElementById("userSection").style.display = "flex";
+            document.getElementById("welcomeSection").style.display = "none";
+            document.getElementById("welcomeMessage").textContent = "";
+            document.getElementById("welcomeSection").classList.remove("logged-in");
+        }
+
+        let downloadLink = "";
+        function showQRModal(file) {
+            downloadLink = file;
+            var qrModal = new bootstrap.Modal(document.getElementById("qrModal"));
+            qrModal.show();
+        }
+
+        function validateQR() {
+            let input = document.getElementById("qrInput").value.trim();
+            let correctContent = "MuaCode123";
+
+            if (input === correctContent) {
+                alert("🎉 Xác nhận thành công! Hệ thống đang tải file...");
+                window.location.href = downloadLink;
+            } else {
+                alert("❌ Nội dung không chính xác. Vui lòng kiểm tra lại!");
+            }
+        }
     </script>
 </body>
 </html>

@@ -3,205 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hosting</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Hosting - CodeXpert ✨</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <script src="js/search.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
+        /* 🌸 Tổng thể */
         body {
-            background-color: #ffffff;
-            color: white;
-            font-family: Arial, sans-serif;
+            background: #f8f9fa; /* Màu nền xám nhạt giống index.html */
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 🏡 Header */
+        .header-container {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #2c3e50, #3498db); /* Gradient giống index.html */
+            color: #fff;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .header-container img {
+            border: 5px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .header-container img:hover {
+            transform: scale(1.1);
+        }
+        .header-container h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #ff6b6b, #e74c3c); /* Gradient hồng giống index.html */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+        .header-container p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 🌟 Navbar */
+        .navbar {
+            background: #3498db; /* Màu xanh giống navbar của index.html */
+            border-radius: 50px;
+            margin: 20px auto;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #ffeb3b; /* Màu vàng nhạt khi hover giống index.html */
+        }
+
+        /* 💖 Hosting Box */
+        .hosting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
         }
         .hosting-box {
-            background: #2c2c2c;
-            border-radius: 10px;
-            padding: 20px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
-            transition: transform 0.2s;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dfe6e9; /* Viền nhạt giống index.html */
+            overflow: hidden;
         }
         .hosting-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3); /* Shadow xanh nhẹ */
         }
+        .hosting-box h5 {
+            font-size: 1.3rem;
+            color: #3498db; /* Màu xanh giống index.html */
+            margin-bottom: 10px;
+        }
+        .hosting-box p {
+            font-size: 1rem;
+            color: #6a6a6a;
+            margin: 5px 0;
+        }
+        .hosting-box .text-warning {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e74c3c; /* Màu giá đỏ cam giống index.html */
+        }
+
+        /* 🎀 Nút Bấm */
         .btn-buy {
-            background: #7FFF00;
+            background: #e74c3c; /* Màu đỏ cam giống index.html */
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 20px; /* Bo góc giống index.html */
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         .btn-buy:hover {
-            background: #6be000;
+            background: #c0392b; /* Màu hover giống index.html */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
         }
+        .btn-buy i {
+            font-size: 1rem;
+        }
+
+        /* 🎀 Modal */
         .modal-content {
-            background: #1e1e1e;
-            color: white;
-            border-radius: 10px;
+            background: #fff;
+            color: #333;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Shadow giống index.html */
         }
         .modal-header {
-            border-bottom: 1px solid #444;
+            background: #3498db; /* Màu xanh giống index.html */
+            color: #fff;
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            padding: 15px;
         }
-        .modal-footer {
-            border-top: 1px solid #444;
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .modal-body p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .modal-body input {
+            border-radius: 25px;
+            padding: 10px 15px;
+            border: 1px solid #dfe6e9; /* Viền nhạt giống index.html */
+            transition: border-color 0.3s ease;
+        }
+        .modal-body input:focus {
+            border-color: #3498db; /* Màu xanh khi focus */
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .modal-body button {
+            background: #e74c3c; /* Màu nút đỏ cam giống index.html */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .modal-body button:hover {
+            background: #c0392b; /* Màu hover giống index.html */
+            transform: translateY(-2px);
+        }
+        #domainResult {
+            margin-top: 15px;
+            font-size: 1.1rem;
         }
         .close-btn {
             background: none;
             border: none;
-            color: white;
             font-size: 24px;
+            color: #fff;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
         .close-btn:hover {
-            color: #7FFF00;
+            opacity: 1;
+            color: #ffeb3b; /* Màu vàng nhạt khi hover */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container h1 {
+                font-size: 2rem;
+            }
+            .hosting-grid {
+                grid-template-columns: 1fr;
+            }
+            .hosting-box {
+                padding: 15px;
+            }
+            .modal-body {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
-   
-    <header class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
-        </div>
+
+    <!-- 💖 Header -->
+    <header class="header-container">
+        <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+        <h1>Đạt Làm Backend</h1>
+        <p>Chào mừng bạn đến với trang web chia sẻ kiến thức IT 💕</p>
+        <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
     </header>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div  class="container">
-            <a class="navbar-brand" href="index.html">Về trang chủ</a>
-        
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-           
-           
+
+    <!-- 🌟 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mt-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-home"></i> Về Trang Chủ</a>
         </div>
     </nav>
-<div class="container mt-5">
 
-    <!-- bodys -->
-    <h2 class="text-center text-success">Hosting SSD Chất Lượng Cao</h2>
-    <div class="row mt-4">
-        <!-- Các gói hosting -->
-        <script>
-            let plans = [
-                {name: "Share Host 1", price: "25.000", storage: "300MB"},
-                {name: "Share Host 2", price: "45.000", storage: "1GB"},
-                {name: "Share Host 3", price: "65.000", storage: "2GB"},
-                {name: "Share Host 4", price: "100.000", storage: "6GB"},
-                {name: "Share Host 5", price: "150.000", storage: "8GB"},
-                {name: "Share Host 6", price: "200.000", storage: "15GB"},
-                {name: "Share Host 7", price: "250.000", storage: "20GB"},
-                {name: "Share Host 8", price: "300.000", storage: "30GB"},
-                {name: "Share Host 9", price: "350.000", storage: "40GB"},
-                {name: "Share Host 10", price: "400.000", storage: "50GB"},
-                {name: "Share Host 11", price: "450.000", storage: "60GB"},
-                {name: "Share Host 12", price: "500.000", storage: "100GB"},
-            ];
-            document.write(plans.map(plan => `
-                <div class="col-md-3 mb-4">
+    <!-- 💻 Gói Hosting -->
+    <div class="container mt-5">
+        <h2 class="text-center" style="font-size: 2rem; font-weight: 600;">
+            <span style="background: linear-gradient(to right, #ff6b6b, #e74c3c); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                🌟 Hosting SSD Chất Lượng Cao 🌟
+            </span>
+        </h2>
+        <div class="hosting-grid mt-4">
+            <script>
+                let plans = [
+                    {name: "🌟 Share Host 1", price: "25.000", storage: "300MB"},
+                    {name: "💖 Share Host 2", price: "45.000", storage: "1GB"},
+                    {name: "💎 Share Host 3", price: "65.000", storage: "2GB"},
+                    {name: "⭐ Share Host 4", price: "100.000", storage: "6GB"}
+                ];
+                document.write(plans.map(plan => `
                     <div class="hosting-box">
-                        <h5 class="text-success">${plan.name}</h5>
-                        <p>Dung lượng: ${plan.storage}</p>
-                        <p class="text-warning">${plan.price} đ/tháng</p>
-                        <button class="btn-buy" onclick="openModal('${plan.name}', '${plan.price}')">ĐẶT MUA NGAY</button>
+                        <h5 class="text-primary">${plan.name}</h5>
+                        <p><i class="fas fa-hdd"></i> Dung lượng: ${plan.storage}</p>
+                        <p class="text-warning"><i class="fas fa-money-bill-wave"></i> ${plan.price} đ/tháng</p>
+                        <button class="btn-buy" onclick="openModal('${plan.name}', '${plan.price}')">
+                            <i class="fas fa-shopping-cart"></i> Đặt Mua
+                        </button>
                     </div>
+                `).join(""));
+            </script>
+        </div>
+    </div>
+
+    <!-- 🎀 Modal -->
+    <div class="modal fade" id="purchaseModal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🌟 Kiểm Tra Tên Miền</h5>
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">×</button>
                 </div>
-            `).join(""));
-        </script>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="purchaseModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Kiểm Tra Tên Miền</h5>
-                <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Nhập tên miền bạn muốn đăng ký:</p>
-                <input type="text" id="domainInput" class="form-control" placeholder="vd: example.com">
-                <button class="btn btn-success mt-2" onclick="checkDomain()">Kiểm tra</button>
-                <div id="domainResult" class="mt-3"></div>
+                <div class="modal-body">
+                    <p>Nhập tên miền bạn muốn đăng ký:</p>
+                    <input type="text" id="domainInput" class="form-control" placeholder="vd: example.com">
+                    <button class="btn mt-3" onclick="checkDomain()">Kiểm Tra Tên Miền</button>
+                    <div id="domainResult" class="mt-3"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Đăng Ký -->
-<div class="modal fade" id="registerModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Đăng Ký Hosting</h5>
-                <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Nhập thông tin đăng ký:</p>
-                <input type="text" class="form-control mb-2" placeholder="Họ và Tên">
-                <input type="email" class="form-control mb-2" placeholder="Email">
-                <input type="text" class="form-control mb-2" placeholder="Số điện thoại">
-                <button class="btn btn-success" onclick="showQR()">Thanh Toán</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Thanh Toán -->
-<div class="modal fade" id="paymentModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thanh Toán</h5>
-                <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body text-center">
-                <p>Quét mã QR để thanh toán:</p>
-                <img src="img/qr.jpg" alt="" style="width: 200px;">
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function openModal(plan, price) {
-        document.getElementById('domainInput').value = "";
-        document.getElementById('domainResult').innerHTML = "";
-        new bootstrap.Modal(document.getElementById('purchaseModal')).show();
-    }
-
-    function checkDomain() {
-        let domain = document.getElementById('domainInput').value;
-        if (!domain) {
-            alert("Vui lòng nhập tên miền!");
-            return;
+    <script>
+        function openModal(plan, price) {
+            document.getElementById('domainInput').value = '';
+            document.getElementById('domainResult').innerHTML = '';
+            const modal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+            modal.show();
+            document.querySelector('.modal-title').textContent = `🌟 Kiểm Tra Tên Miền - ${plan} (${price} đ/tháng)`;
         }
-        let available = Math.random() > 0.5; // Giả lập kiểm tra
-        if (available) {
-            document.getElementById('domainResult').innerHTML = `<p class="text-success">Tên miền có sẵn! <button class="btn btn-primary" onclick="openRegister()">Tiếp tục</button></p>`;
-        } else {
-            document.getElementById('domainResult').innerHTML = `<p class="text-danger">Tên miền đã được đăng ký!</p>`;
+
+        function checkDomain() {
+            let domain = document.getElementById('domainInput').value.trim();
+            if (!domain) {
+                document.getElementById('domainResult').innerHTML = `<p class="text-danger"><i class="fas fa-exclamation-triangle"></i> Vui lòng nhập tên miền!</p>`;
+                return;
+            }
+            let available = Math.random() > 0.5;
+            if (available) {
+                document.getElementById('domainResult').innerHTML = `
+                    <p class="text-success"><i class="fas fa-check-circle"></i> Tên miền có sẵn! 
+                    <button class="btn btn-primary ms-2" onclick="proceedPurchase()">Tiếp Tục</button></p>
+                `;
+            } else {
+                document.getElementById('domainResult').innerHTML = `<p class="text-danger"><i class="fas fa-times-circle"></i> Tên miền đã đăng ký!</p>`;
+            }
         }
-    }
 
-    function openRegister() {
-        new bootstrap.Modal(document.getElementById('registerModal')).show();
-    }
-
-    function showQR() {
-        new bootstrap.Modal(document.getElementById('paymentModal')).show();
-    }
-</script>
+        function proceedPurchase() {
+            alert('Cảm ơn bạn! Đơn hàng của bạn đang được xử lý. Vui lòng kiểm tra email!');
+            bootstrap.Modal.getInstance(document.getElementById('purchaseModal')).hide();
+        }
+    </script>
 
 </body>
 </html>

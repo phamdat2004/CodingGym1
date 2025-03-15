@@ -5,24 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chợ Code - Bán Source Code Chất Lượng</title>
     
-    <script src="js/script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 3rem 0;
             position: relative;
+            overflow: hidden;
         }
+        
+        header img {
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        header img:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Navbar */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #fff !important;
+        }
+        
+        /* Card */
         .card {
-            margin-bottom: 20px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
         }
+        
         .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease-in-out;
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            border: none;
+            border-radius: 25px;
+            padding: 0.6rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* Fireworks */
         .fireworks {
             position: fixed;
             top: 0;
@@ -30,141 +109,40 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: -1;
         }
-        footer {
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: white;
-            padding: 40px 0;
-        }
-        footer a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-
-        .chat-call-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        .chat-bubble {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-        }
-        .chat-bubble.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .chat-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: auto;
-            padding: 10px;
-            border-radius: 25px;
-            background: #007bff;
-            color: white;
-            font-size: 18px;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            animation: shake 1s infinite;
-        }
-        .chat-button i {
-            margin-right: 5px;
-        }
-        .chat-button:hover {
-            background: #0056b3;
-        }
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            50% { transform: translateX(3px); }
-            75% { transform: translateX(-3px); }
-            100% { transform: translateX(0); }
-        }
-        .chat-window {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-        }
-        .chat-header {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .close-chat {
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .chat-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .chat-input {
-            display: flex;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .chat-input button {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        
+        @media (max-width: 768px) {
+            header img {
+                width: 120px;
+            }
+            
+            .card {
+                margin-bottom: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <canvas class="fireworks"></canvas>
-    <header class="bg-dark text-white text-center py-4">
+    
+    <header class="text-white text-center">
         <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle mb-3" width="150">
+            <h1 class="display-5 fw-bold">Đạt làm BackEnd 💻</h1>
+            <p class="lead">Chào mọi người! Mình là Dev Backend Java trong lĩnh vực công nghệ.</p>
+            <p>Trang web này tạo ra để anh em Dev trao đổi kiến thức IT và cung cấp source code chất lượng để học tập, nghiên cứu.</p>
         </div>
     </header>
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fa-solid fa-backward"></i> Về trang chủ</a>
-        
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-backward me-2"></i>Về trang chủ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
@@ -175,22 +153,20 @@
                     <input class="form-control me-2" type="search" id="searchInput" placeholder="Tìm kiếm...">
                 </form>
             </div>
-
         </div>
     </nav>
     
-    <main class="container mt-4">
+    <main class="container mt-5">
         <div class="row">
-            
-            <section class="col-md-9">
-                <h2>Html & Template</h2>
+            <section class="col-md-12">
+                <h2 class="mb-4 text-center">HTML & Template</h2>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/share-template-blogspot-phim-anime-kha-dep-cho-anh-em-muon-lam-phim-8589.jpg" class="card-img-top" alt="Code Android">
+                            <img src="https://sharecode.vn/FilesUpload/Code/share-template-blogspot-phim-anime-kha-dep-cho-anh-em-muon-lam-phim-8589.jpg" class="card-img-top" alt="Template Anime">
                             <div class="card-body">
-                                <h5 class="card-title">Html Template</h5>
-                                <p class="card-text">Share Template Blogspot Phim, Anime Khá Đẹp Cho Anh Em Muốn Làm Phim</p>
+                                <h5 class="card-title">HTML Template</h5>
+                                <p class="card-text">Template Blogspot Phim, Anime đẹp mắt dành cho anh em làm phim.</p>
                                 <span class="price text-danger fw-bold">150.000đ</span>
                                 <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
                             </div>
@@ -198,10 +174,10 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/share-code-website-ban-noi-that-do-gia-dung-ban-hang-ban-ghe-noi-that-urdan-8444.jpg" class="card-img-top" alt="Code React Native">
+                            <img src="https://sharecode.vn/FilesUpload/Code/share-code-website-ban-noi-that-do-gia-dung-ban-hang-ban-ghe-noi-that-urdan-8444.jpg" class="card-img-top" alt="Template Nội thất">
                             <div class="card-body">
-                                <h5 class="card-title">Html Template</h5>
-                                <p class="card-text">Share code website bán nội thất đồ gia dụng bán hàng bàn ghế nội thất Urdan</p>
+                                <h5 class="card-title">HTML Template</h5>
+                                <p class="card-text">Website bán nội thất, đồ gia dụng Urdan chuyên nghiệp.</p>
                                 <span class="price text-danger fw-bold">95.000đ</span>
                                 <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
                             </div>
@@ -209,10 +185,10 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/share-code-website-ban-quan-ao-thuong-mai-dien-tu-ban-quan-ao-modave-82237.jpg" class="card-img-top" alt="Code React Native">
+                            <img src="https://sharecode.vn/FilesUpload/Code/share-code-website-ban-quan-ao-thuong-mai-dien-tu-ban-quan-ao-modave-82237.jpg" class="card-img-top" alt="Template Quần áo">
                             <div class="card-body">
-                                <h5 class="card-title">Html Template</h5>
-                                <p class="card-text">Share code website bán quần áo thương mại điện tử bán quần áo Modave </p>
+                                <h5 class="card-title">HTML Template</h5>
+                                <p class="card-text">Website thương mại điện tử bán quần áo Modave hiện đại.</p>
                                 <span class="price text-danger fw-bold">95.000đ</span>
                                 <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
                             </div>
@@ -222,94 +198,7 @@
             </section>
         </div>
     </main>
-    
-    <footer class="text-white text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Về Chợ Code</h5>
-                    <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
-                    <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
-                    <p>Email: phamtiendat21072004@gmail.com</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Liên kết nhanh</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Trang chủ</a></li>
-                        <li><a href="#">Danh mục</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                        <li><a href="#">Điều khoản sử dụng</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Kết nối với chúng tôi</h5>
-                    <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
-                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
-                    <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-  <!-- sdt -->
-  <div class="chat-call-container">
-    <div class="chat-bubble" id="chat-message">Xin chào!</div>
-    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
-    
-    <div class="chat-button" id="chat-button">
-        <i class="fa-regular fa-comments"></i> Chat
-    </div>
-    <div class="chat-button" id="call-button">
-        <i class="fa-solid fa-phone"></i> Gọi
-    </div>
-</div>
 
-<div class="chat-window" id="chat-window">
-    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
-    <div class="chat-body" id="chat-body"></div>
-    <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
-        <button id="send-button">Gửi</button>
-    </div>
-</div>
-
-
-    <script>
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(() => {
-                document.getElementById("chat-message").classList.add("show");
-            }, 500);
-            setTimeout(() => {
-                document.getElementById("call-message").classList.add("show");
-            }, 1000);
-        });
-        
-        document.getElementById("chat-button").addEventListener("click", function() {
-            const chatWindow = document.getElementById("chat-window");
-            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
-        });
-        
-        document.getElementById("close-chat").addEventListener("click", function() {
-            document.getElementById("chat-window").style.display = "none";
-        });
-        
-        document.getElementById("send-button").addEventListener("click", function() {
-            const input = document.getElementById("chat-input");
-            const message = input.value.trim();
-            if (message) {
-                const chatBody = document.getElementById("chat-body");
-                const userMessage = document.createElement("div");
-                userMessage.textContent = "Bạn: " + message;
-                chatBody.appendChild(userMessage);
-                input.value = "";
-                
-                setTimeout(() => {
-                    const botMessage = document.createElement("div");
-                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
-                    chatBody.appendChild(botMessage);
-                }, 1000);
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

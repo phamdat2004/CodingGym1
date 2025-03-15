@@ -3,319 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chợ Code - Bán Source Code Chất Lượng</title>
+    <title>🎀 Chợ Code Đáng Yêu 🎀</title>
     
-    <script src="js/script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            position: relative;
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(to bottom, #fffcf7, #ffeef0);
+            color: #444;
+            line-height: 1.6;
         }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            padding: 2.5rem 0;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        header h1 {
+            font-weight: 600;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        header img {
+            border: 5px solid #fff;
+            transition: transform 0.3s ease;
+        }
+        
+        header img:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ff758c !important;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        h2.text-primary {
+            color: #ff4d6d !important;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
         .card {
-            margin-bottom: 20px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
+        
         .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease-in-out;
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
         }
-        footer {
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: white;
-            padding: 40px 0;
+        
+        .card-body {
+            padding: 1.5rem;
         }
-        footer a {
-            color: #ffc107;
-            text-decoration: none;
+        
+        .card-title {
+            color: #d63384;
+            font-weight: 600;
+            font-size: 1.3rem;
         }
-        footer a:hover {
-            text-decoration: underline;
+        
+        .price {
+            font-size: 1.3rem;
+            color: #e44d26;
+            font-weight: 600;
+            margin: 0.5rem 0;
         }
-
-
-        .chat-call-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+        
+        .text-muted {
+            font-size: 0.9rem;
         }
-        .chat-bubble {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-        }
-        .chat-bubble.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .chat-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: auto;
-            padding: 10px;
-            border-radius: 25px;
-            background: #007bff;
-            color: white;
-            font-size: 18px;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            animation: shake 1s infinite;
-        }
-        .chat-button i {
-            margin-right: 5px;
-        }
-        .chat-button:hover {
-            background: #0056b3;
-        }
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            50% { transform: translateX(3px); }
-            75% { transform: translateX(-3px); }
-            100% { transform: translateX(0); }
-        }
-        .chat-window {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-        }
-        .chat-header {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .close-chat {
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .chat-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .chat-input {
-            display: flex;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .chat-input button {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background: #007bff;
-            color: white;
+        
+        .btn-primary {
+            background: #ff758c;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 25px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #ff4d6d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #a4b0be;
+            border: none;
+            border-radius: 25px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #747d8c;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 20px;
+            background: #fff0f6;
+            border: 3px solid #ff85a2;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .modal-title {
+            color: #d63384;
+            font-weight: 600;
+        }
+        
+        .modal-body img {
+            border: 3px solid #fff;
+            border-radius: 10px;
+        }
+        
+        .modal-footer .btn-primary {
+            background: #ff85a2;
+        }
+        
+        .modal-footer .btn-primary:hover {
+            background: #ff4d6d;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header img {
+                width: 100px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .card-img-top {
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <canvas class="fireworks"></canvas>
-    <header class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
+    <header>
+        <div class="container text-center">
+            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle mb-3" width="120">
+            <h1>🐱 Đạt làm BackEnd 💻</h1>
+            <p class="lead">Chào mọi người! Đây là nơi giao lưu và chia sẻ source code chất lượng cho anh em Dev! 🎀</p>
         </div>
     </header>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fa-solid fa-backward"></i> Về trang chủ</a>
-        
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Danh mục</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
-                </ul>
-                <form class="d-flex ms-3" id="searchForm">
-                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Tìm kiếm...">
-                </form>
-            </div>
-
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-home me-2"></i>Trang chủ 🏡
+            </a>
         </div>
     </nav>
     
-    <main class="container mt-4">
+    <main class="container">
         <div class="row">
-            
-            <section class="col-md-9">
-                <h2>Android Studio</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/source-code-game-ai-la-trieu-phu-152633.jpg" class="card-img-top" alt="Code Android">
+            <section class="col-md-12">
+                <h2 class="text-center text-primary">🌟 Source Code Android 🌟</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="card text-center">
+                            <img src="https://sharecode.vn/FilesUpload/Code/source-code-game-ai-la-trieu-phu-cuc-muot-day-du-chuc-nang-14155.jpg" class="card-img-top" alt="Game Ai Là Triệu Phú">
                             <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Source code game Ai Là Triệu Phú</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a href="hhttps://drive.google.com/drive/folders/15eygrSIUb8igqGa_lUp3oSS-ha9yV9Sq" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <h5 class="card-title">🎮 Game Ai Là Triệu Phú</h5>
+                                <p class="card-text">Dành cho Android - Miễn phí! 🎉</p>
+                                <span class="price">Free</span>
+                                <p class="text-muted mt-2">👤 <strong>Người đăng:</strong> Thắng Nguyễn</p>
+                                <a href="https://www.youtube.com/embed/zPQnaCMr_Xs" class="btn btn-secondary d-block mt-2">👀 Xem Demo</a>
+                                <a href="https://github.com/thangikcu/AiLaTrieuPhu" class="btn btn-primary d-block mt-2">📥 Tải ngay</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/quan-ly-nhan-vien-android-191544.jpg" class="card-img-top" alt="Code React Native">
+                    <div class="col">
+                        <div class="card text-center">
+                            <img src="https://sharecode.vn/FilesUpload/Code/quan-ly-nhan-vien-android-191544.jpg" class="card-img-top" alt="Quản Lý Nhân Viên">
                             <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Quản lý Nhân viên android cơ bản</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a href="https://drive.google.com/drive/folders/130aCevK1PxEchAb6eED7U54wEduf70Bk" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <h5 class="card-title">💼 Quản Lý Nhân Viên</h5>
+                                <p class="card-text">Ứng dụng Android cơ bản 🚀</p>
+                                <span class="price">Free</span>
+                                <p class="text-muted mt-2">👤 <strong>Người đăng:</strong> TL Channel</p>
+                                <a href="https://www.youtube.com/watch?v=Gq8uIpIltnU" class="btn btn-secondary d-block mt-2">👀 Xem Demo</a>
+                                <a href="https://drive.google.com/drive/folders/130aCevK1PxEchAb6eED7U54wEduf70Bk" class="btn btn-primary d-block mt-2">📥 Tải ngay</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-tot-nghiep-app-order-food-and-drink-full-bao-cao-word-ppt-74643.jpg" class="card-img-top" alt="Code React Native">
+                    <div class="col">
+                        <div class="card text-center">
+                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-tot-nghiep-app-order-food-and-drink-full-bao-cao-word-ppt-74643.jpg" class="card-img-top" alt="App Order Food">
                             <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Đồ án tốt nghiệp app order food and drink + full báo cáo word + ppt</p>
-                                <span class="price text-danger fw-bold">250.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <h5 class="card-title">🍔 App Order Food</h5>
+                                <p class="card-text">Đầy đủ chức năng và báo cáo 📜</p>
+                                <span class="price">150.000đ</span>
+                                <p class="text-muted mt-2">👤 <strong>Người đăng:</strong> Đoàn Dev</p>
+                                <a href="https://www.youtube.com/watch?v=_z4yDHQrOEQ" class="btn btn-secondary d-block mt-2">👀 Xem Demo</a>
+                                <a href="#" class="btn btn-primary d-block mt-2" onclick="showQRModal('download-shop.zip')">📥 Mua ngay</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/sourch-code-may-tinh-cam-tay-android-75922.jpg" class="card-img-top" alt="Code React Native">
+                    <div class="col">
+                        <div class="card text-center">
+                            <img src="https://sharecode.vn/FilesUpload/Code/free-code-android-vn-music--download-all-music-151852.jpg" class="card-img-top" alt="VN Music">
                             <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Sourch code máy tính cầm tay android</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a href="https://drive.google.com/file/d/1tyAJnlr13b2AbWddkpXD09GVba5xpdlH/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <h5 class="card-title">🎵 VN Music</h5>
+                                <p class="card-text">Ứng dụng nghe nhạc miễn phí 🎶</p>
+                                <span class="price">Free</span>
+                                <p class="text-muted mt-2">👤 <strong>Người đăng:</strong> Trung Dung</p>
+                                <a href="https://play.google.com/store/apps/details?id=com.vapp.vnmsdl&pli=1" class="btn btn-secondary d-block mt-2">👀 Xem Demo</a>
+                                <a href="https://drive.google.com/file/d/166Fsm2LU2Lq-jRgl-WmNcIXzW68xKJmX/view" class="btn btn-primary d-block mt-2">📥 Tải ngay</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/ung-dung-truyen-cuoi-tren-android-giao-dien-dep-04333.jpg" class="card-img-top" alt="Code React Native">
+                    <div class="col">
+                        <div class="card text-center">
+                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-android---online-shop-ban-banh---jetpack-compose-firebase-132816.jpg" class="card-img-top" alt="Online Shop Bán Bánh">
                             <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Ứng dụng truyện cười trên android giao diện đẹp</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a href="https://drive.google.com/file/d/1KatBBWEi8iNoCuLfgoO6ss-LBQYEOSCp/view" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/coinmarketcap---crypto-prices-coin-market-cap-9423.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">CoinMarketCap - Crypto Prices & Coin Market Cap</p>
-                                <span class="price text-danger fw-bold">Free</span>
-                                <a href="https://drive.google.com/file/d/1wn0ZzfesMMsk5rlf6w6B7dwskZU9tvbd/edit" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-ung-dung-dat-lich-hen-app-java-firebase-android-studio-0127.jpg" class="card-img-top" alt="Code Android">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Đồ án ứng dụng đặt lịch hẹn App Java Firebase Android Studio</p>
-                                <span class="price text-danger fw-bold">90.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/do-an-android-kotlin---ung-dung-quan-ly-ban-sach-online-admin-users---book-store-pro-app-10512.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Đồ án Android Kotlin - Ứng dụng quản lý bán sách online (Admin & Users)</p>
-                                <span class="price text-danger fw-bold">280.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/ung-dung-du-bao-thoi-tiet-su-dung-kotlinandroid-studio-02012.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">Ứng dụng dự báo thời tiết sử dụng Kotlin,Android Studio</p>
-                                <span class="price text-danger fw-bold">20.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/app-sach-android-java-firebase-112336.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">App sách android java firebase  </p>
-                                <span class="price text-danger fw-bold">180.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/android-java-sqlite-bao-cao-word-app-ban-rau-cu-android-co-day-du-chuc-nang-quan-tri-va-dat-hang-xem-gio-hang-thanh-toan-xem-chi-tiet-don-hang-them-sua-xoa.-20432.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">App bán rau củ android có đầy đủ chức năng quản trị và đặt hàng, xem giỏ hàng thanh toán</p>
-                                <span class="price text-danger fw-bold">179.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="https://sharecode.vn/FilesUpload/Code/android-java-sqlite-app-dat-lich-kham-benh-co-phan-quyen-ro-rang-chi-tiet-tu-admin-nguoi-dung-bac-si-131110.jpg" class="card-img-top" alt="Code React Native">
-                            <div class="card-body">
-                                <h5 class="card-title">Android</h5>
-                                <p class="card-text">App đặt lịch khám bệnh có phân quyền rõ ràng chi tiết từ admin, người dùng</p>
-                                <span class="price text-danger fw-bold">45.000đ</span>
-                                <a href="qr.html" class="btn btn-primary d-block mt-2">Tải ngay</a>
+                                <h5 class="card-title">🧁 Online Shop Bán Bánh</h5>
+                                <p class="card-text">Jetpack Compose & Firebase 🔥</p>
+                                <span class="price">50.000đ</span>
+                                <p class="text-muted mt-2">👤 <strong>Người đăng:</strong> Vua Template</p>
+                                <a href="https://www.youtube.com/watch?v=ephsMBuOyQY" class="btn btn-secondary d-block mt-2">👀 Xem Demo</a>
+                                <a href="#" class="btn btn-primary d-block mt-2" onclick="showQRModal('download-shop.zip')">📥 Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -323,94 +268,50 @@
             </section>
         </div>
     </main>
-    
-    <footer class="text-white text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Về Chợ Code</h5>
-                    <p>Chuyên cung cấp source code chất lượng cao, hỗ trợ nhanh chóng.</p>
-                    <p>Địa chỉ: Ngọc Hồi - Thanh Trì - Hà Nội</p>
-                    <p>Email: phamtiendat21072004@gmail.com</p>
+
+    <!-- Modal Quét QR -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrModalLabel">🎀 Quét Mã QR Để Mua 🎀</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-md-4">
-                    <h5>Liên kết nhanh</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Trang chủ</a></li>
-                        <li><a href="#">Danh mục</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                        <li><a href="#">Điều khoản sử dụng</a></li>
-                    </ul>
+                <div class="modal-body text-center">
+                    <p>Vui lòng quét mã QR và nhập nội dung chuyển khoản để tải file.</p>
+                    <img src="img/qr1.jpg" alt="QR Code" class="img-fluid mb-3" width="200">
+                    <input type="text" id="qrInput" class="form-control" placeholder="Nhập nội dung xác nhận...">
+                    <small class="text-muted d-block mt-2">💡 Gợi ý: Nội dung chuyển khoản là <b>"MuaCode123"</b></small>
                 </div>
-                <div class="col-md-4">
-                    <h5>Kết nối với chúng tôi</h5>
-                    <p><a href="https://www.facebook.com/phamtiendat2172004/"><i class="fab fa-facebook"></i> Facebook</a></p>
-                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
-                    <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">❌ Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="validateQR()">✅ Xác nhận</button>
                 </div>
             </div>
         </div>
-    </footer>
-  <!-- sdt -->
-  <div class="chat-call-container">
-    <div class="chat-bubble" id="chat-message">Xin chào!</div>
-    <div class="chat-bubble" id="call-message">Gọi cho chúng tôi ngay</div>
-    
-    <div class="chat-button" id="chat-button">
-        <i class="fa-regular fa-comments"></i> Chat
     </div>
-    <div class="chat-button" id="call-button">
-        <i class="fa-solid fa-phone"></i> Gọi
-    </div>
-</div>
 
-<div class="chat-window" id="chat-window">
-    <div class="chat-header">Chat với Bot <span class="close-chat" id="close-chat">&times;</span></div>
-    <div class="chat-body" id="chat-body"></div>
-    <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
-        <button id="send-button">Gửi</button>
-    </div>
-</div>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(() => {
-                document.getElementById("chat-message").classList.add("show");
-            }, 500);
-            setTimeout(() => {
-                document.getElementById("call-message").classList.add("show");
-            }, 1000);
-        });
-        
-        document.getElementById("chat-button").addEventListener("click", function() {
-            const chatWindow = document.getElementById("chat-window");
-            chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
-        });
-        
-        document.getElementById("close-chat").addEventListener("click", function() {
-            document.getElementById("chat-window").style.display = "none";
-        });
-        
-        document.getElementById("send-button").addEventListener("click", function() {
-            const input = document.getElementById("chat-input");
-            const message = input.value.trim();
-            if (message) {
-                const chatBody = document.getElementById("chat-body");
-                const userMessage = document.createElement("div");
-                userMessage.textContent = "Bạn: " + message;
-                chatBody.appendChild(userMessage);
-                input.value = "";
-                
-                setTimeout(() => {
-                    const botMessage = document.createElement("div");
-                    botMessage.textContent = "Bot: " + "Tôi đã nhận được tin nhắn của bạn! Tôi có thể giúp gì cho bạn";
-                    chatBody.appendChild(botMessage);
-                }, 1000);
+        let downloadLink = "";
+
+        function showQRModal(file) {
+            downloadLink = file;
+            var qrModal = new bootstrap.Modal(document.getElementById("qrModal"));
+            qrModal.show();
+        }
+
+        function validateQR() {
+            let input = document.getElementById("qrInput").value.trim();
+            let correctContent = "MuaCode123";
+
+            if (input === correctContent) {
+                alert("🎉 Xác nhận thành công! Hệ thống đang tải file...");
+                window.location.href = downloadLink;
+            } else {
+                alert("❌ Nội dung không chính xác. Vui lòng kiểm tra lại!");
             }
-        });
+        }
     </script>
 </body>
 </html>

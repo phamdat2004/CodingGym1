@@ -3,65 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chợ Code</title>
+    <title>Quét Mã QR</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-        }
-        .product {
-            border: 1px solid #ddd;
+            background: #f8f9fa;
+            margin: 0;
             padding: 20px;
-            margin: 10px;
-            display: inline-block;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
+        .container {
+            max-width: 400px;
+            margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
-            position: relative;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .close {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            font-size: 24px;
-            cursor: pointer;
+        h2 {
+            color: #ff4757;
+        }
+        img {
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 1.1em;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    
-    <div id="qrModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeQRModal()">&times;</span>
-            <h2>Quét QR để thanh toán</h2>
-            <img src="img/qr.jpg" alt="QR Thanh Toán MB Bank" width="200">
-            <p>Chuyển khoản đúng số tiền hệ thống sẽ tự tải code!</p>
-        </div>
+
+    <div class="container">
+        <h2>🔍 Quét Mã QR để Thanh Toán</h2>
+        <img src="img/qr1.jpg" alt="QR Thanh Toán MB Bank">
+        <p>Chuyển khoản đúng số tiền, hệ thống sẽ tự động tải code về!</p>
     </div>
-    
-    <script>
-        function openQRModal() {
-            document.getElementById("qrModal").style.display = "flex";
-        }
-        function closeQRModal() {
-            document.getElementById("qrModal").style.display = "none";
-        }
-    </script>
+
 </body>
 </html>

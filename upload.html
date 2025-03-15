@@ -3,170 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Source Code</title>
+    <title>Upload Source Code - CodeXpert ✨</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <script src="js/search.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <!-- Thêm SweetAlert2 cho thông báo -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body { background: #f8f9fa; }
-        .container { max-width: 900px; margin-top: 20px; }
-        .code-item { box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; }
-        .code-item img { width: 100%; height: 150px; object-fit: cover; }
-        .hidden { display: none; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 500px; }
+        /* 🌸 Tổng thể */
+        body {
+            background: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 🏡 Header */
+        .header-container {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: #fff;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .header-container img {
+            border: 5px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .header-container img:hover {
+            transform: scale(1.1);
+        }
+        .header-container h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #ff6b6b, #e74c3c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+        .header-container p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 🌟 Navbar */
+        .navbar {
+            background: #3498db;
+            border-radius: 50px;
+            margin: 20px auto;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #ffeb3b;
+        }
+
+        /* 💻 Code Items */
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .code-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .code-item:hover {
+            transform: scale(1.05);
+        }
+        .code-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+        .code-item .card-body {
+            padding: 15px;
+        }
+        .code-item .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .code-item .card-text {
+            color: #6a6a6a;
+            font-size: 0.9rem;
+        }
+        .price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+        .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-primary {
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-info {
+            background: #3498db;
+            border: none;
+        }
+        .btn-info:hover {
+            background: #2980b9;
+        }
+        .btn-success {
+            background: #28a745;
+            border: none;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .btn-warning {
+            background: #ff6b6b;
+            border: none;
+            color: #fff;
+        }
+        .btn-warning:hover {
+            background: #e74c3c;
+        }
+        .btn-danger {
+            background: #dc3545;
+            border: none;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .btn-primary {
+            background: #3498db;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        /* 🎀 Upload Button */
+        .btn-upload {
+            background: #e74c3c;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-upload:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        /* 🔍 Search Bar */
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .search-bar input {
+            border-radius: 25px;
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #dfe6e9;
+            transition: border-color 0.3s ease;
+        }
+        .search-bar input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .search-bar i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3498db;
+        }
+
+        /* 🎀 Modal */
+        .modal-content {
+            background: #fff;
+            color: #333;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .modal-header {
+            background: #3498db;
+            color: #fff;
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            padding: 15px;
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .modal-body input, .modal-body select {
+            border-radius: 25px;
+            padding: 10px 15px;
+            border: 1px solid #dfe6e9;
+            transition: border-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .modal-body input:focus, .modal-body select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .modal-body button {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-submit {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+        }
+        .btn-submit:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        .btn-cancel {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+        }
+        .btn-cancel:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .close-btn:hover {
+            opacity: 1;
+            color: #ffeb3b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container h1 {
+                font-size: 2rem;
+            }
+            .code-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-body {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
-        </div>
+    <!-- 💖 Header -->
+    <header class="header-container">
+        <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+        <h1>Đạt Làm Backend 💻</h1>
+        <p>Xin chào mọi người! Hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ.</p>
+        <p>Trang web này tạo ra để anh em Dev trao đổi kiến thức IT và tải source code chất lượng.</p>
     </header>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div  class="container">
-            <a class="navbar-brand" href="index.html">Về trang chủ</a>
-        
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-           
-           
+
+    <!-- 🌟 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-home"></i> Về Trang Chủ</a>
         </div>
     </nav>
-    <div class="container">
-        <button class="btn btn-primary mb-3" id="showUploadForm">Tải Code lên</button>
-        
-        <div id="uploadModal" class="modal">
-            <div class="modal-content">
-                <h2 class="text-center">Upload Source Code</h2>
-                <form id="uploadForm">
-                    <div class="mb-3">
-                        <input type="text" id="codeName" class="form-control" placeholder="Tên code" required>
+
+    <!-- 💻 Main Content -->
+    <div class="container mt-5">
+        <h2 class="text-center" style="font-size: 2rem; font-weight: 600;">
+            <span style="background: linear-gradient(to right, #ff6b6b, #e74c3c); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                🌟 Tải Lên Source Code
+            </span>
+        </h2>
+
+        <!-- 🔍 Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm theo tên hoặc loại code...">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <!-- 📊 Code Stats -->
+        <div class="text-center mb-3">
+            <p>Tổng số code đã upload: <span id="codeCount">0</span></p>
+        </div>
+
+        <!-- 🎀 Upload Button -->
+        <div class="text-center mb-4">
+            <button class="btn-upload" id="showUploadForm">
+                <i class="fas fa-cloud-upload-alt"></i> Tải Code Lên
+            </button>
+        </div>
+
+        <!-- 📋 Code List -->
+        <div id="codeList" class="code-grid"></div>
+
+        <!-- 🎀 Upload Modal -->
+        <div class="modal fade" id="uploadModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">🌟 Upload Source Code</h5>
+                        <button type="button" class="close-btn" data-bs-dismiss="modal">×</button>
                     </div>
-                    <div class="mb-3">
-                        <input type="text" id="codeType" class="form-control" placeholder="Loại code (Android, PHP...)" required>
+                    <div class="modal-body">
+                        <form id="uploadForm">
+                            <input type="text" id="codeName" class="form-control" placeholder="Tên code" required>
+                            <select id="codeType" class="form-control" required>
+                                <option value="" disabled selected>Chọn loại code</option>
+                                <option value="Android">Android</option>
+                                <option value="PHP & MySQL">PHP & MySQL</option>
+                                <option value="Java & SpringBoot">Java & SpringBoot</option>
+                                <option value="ASP.NET">ASP.NET</option>
+                                <option value="HTML & Template">HTML & Template</option>
+                            </select>
+                            <input type="number" id="codePrice" class="form-control" placeholder="Giá code (0 = miễn phí)" required>
+                            <input type="text" id="authorName" class="form-control" placeholder="Người đăng" required>
+                            <input type="url" id="demoLink" class="form-control" placeholder="Link xem demo" required>
+                            <input type="url" id="downloadLink" class="form-control" placeholder="Link tải code" required>
+                            <input type="file" id="imageInput" class="form-control" accept="image/*" required>
+                            <input type="hidden" id="codeId">
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-submit" id="uploadBtn">Tải Lên</button>
+                                <button type="button" class="btn btn-cancel" id="cancelUpload" data-bs-dismiss="modal">Hủy</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <input type="number" id="codePrice" class="form-control" placeholder="Giá code (0 = miễn phí)" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" id="authorName" class="form-control" placeholder="Người đăng" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="url" id="demoLink" class="form-control" placeholder="Link xem demo" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="url" id="downloadLink" class="form-control" placeholder="Link tải code" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="file" id="imageInput" class="form-control" accept="image/*" required>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-success" id="uploadBtn">Tải lên</button>
-                        <button type="button" class="btn btn-danger" id="cancelUpload">Hủy</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-        <div id="codeList" class="row mt-4"></div>
-        <div id="qrModal" class="modal">
-            <div class="modal-content text-center">
-                <span class="btn-close" onclick="closeQRModal()">&times;</span>
-                <h4>Quét mã QR để thanh toán</h4>
-                <img id="qrImage" src="img/qr.jpg" width="200" />
+
+        <!-- 🎀 QR Modal -->
+        <div class="modal fade" id="qrModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">🌟 Quét Mã QR Để Thanh Toán</h5>
+                        <button type="button" class="close-btn" data-bs-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="qrImage" src="img/qr.jpg" width="200" alt="QR Code">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🎀 Confirm Delete Modal -->
+        <div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác Nhận Xóa</h5>
+                        <button type="button" class="close-btn" data-bs-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xóa source code này không?</p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('showUploadForm').addEventListener('click', () => {
-            document.getElementById('uploadModal').style.display = 'flex';
-        });
-        document.getElementById('cancelUpload').addEventListener('click', () => {
-            document.getElementById('uploadForm').reset();
-            document.getElementById('uploadModal').style.display = 'none';
-        });
-        document.getElementById('uploadBtn').addEventListener('click', () => {
-            let codeName = document.getElementById('codeName').value;
-            let codeType = document.getElementById('codeType').value;
-            let codePrice = document.getElementById('codePrice').value;
-            let authorName = document.getElementById('authorName').value;
-            let demoLink = document.getElementById('demoLink').value;
-            let downloadLink = document.getElementById('downloadLink').value;
-            let imageInput = document.getElementById('imageInput');
-            
-            if (!codeName || !authorName || !demoLink || !downloadLink || imageInput.files.length === 0) {
-                alert("Vui lòng điền đầy đủ thông tin!");
-                return;
-            }
-            let fileReader = new FileReader();
-            fileReader.onload = function(event) {
-                let fileData = {
-                    id: Date.now(),
-                    type: codeType,
-                    name: codeName,
-                    price: codePrice,
-                    author: authorName,
-                    demo: demoLink,
-                    download: downloadLink,
-                    imageUrl: event.target.result
-                };
-                let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
-                storedData.push(fileData);
-                localStorage.setItem("uploadedCodes", JSON.stringify(storedData));
-                updateCodeList();
-            };
-            fileReader.readAsDataURL(imageInput.files[0]);
-            document.getElementById('uploadForm').reset();
-            document.getElementById('uploadModal').style.display = 'none';
-        });
-        function updateCodeList() {
-            let codeList = document.getElementById('codeList');
-            codeList.innerHTML = "";
-            let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
-            storedData.forEach(code => {
-                codeList.innerHTML += `
-                    <div class="col-md-4 mb-4" id="code-${code.id}">
-                        <div class="card code-item">
-                            <img src="${code.imageUrl}" class="card-img-top" alt="Demo">
-                            <div class="card-body">
-                                <h5 class="card-title">${code.name} - <small>${code.type}</small></h5>
-                                <p class="card-text">Người đăng: ${code.author}</p>
-                                <a href="${code.demo}" class="btn btn-info btn-sm" target="_blank">Xem Demo</a>
-                                ${code.price > 0 ? `<button class="btn btn-warning btn-sm" onclick="showQRModal()">Mua (${code.price} VNĐ)</button>` : `<a href="${code.download}" class="btn btn-success btn-sm" target="_blank">Tải Code</a>`}
-                             
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCodeList();
+
+            // Kiểm tra đăng nhập trước khi upload
+            document.getElementById('showUploadForm').addEventListener('click', () => {
+                let isLoggedIn = localStorage.getItem('isLoggedIn');
+                if (isLoggedIn !== 'true') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '⚠️ Vui lòng đăng nhập!',
+                        text: 'Bạn cần đăng nhập để upload source code.',
+                        confirmButtonColor: '#e74c3c'
+                    });
+                    return;
+                }
+                document.getElementById('uploadForm').reset();
+                document.getElementById('codeId').value = '';
+                document.getElementById('uploadBtn').textContent = 'Tải Lên';
+                new bootstrap.Modal(document.getElementById('uploadModal')).show();
+            });
+
+            // Upload hoặc chỉnh sửa code
+            document.getElementById('uploadBtn').addEventListener('click', () => {
+                let codeId = document.getElementById('codeId').value;
+                let codeName = document.getElementById('codeName').value;
+                let codeType = document.getElementById('codeType').value;
+                let codePrice = document.getElementById('codePrice').value;
+                let authorName = document.getElementById('authorName').value;
+                let demoLink = document.getElementById('demoLink').value;
+                let downloadLink = document.getElementById('downloadLink').value;
+                let imageInput = document.getElementById('imageInput');
+
+                if (!codeName || !codeType || !authorName || !demoLink || !downloadLink || (!codeId && imageInput.files.length === 0)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '❌ Thiếu thông tin!',
+                        text: 'Vui lòng điền đầy đủ thông tin.',
+                        confirmButtonColor: '#e74c3c'
+                    });
+                    return;
+                }
+
+                let storedData = JSON.parse(localStorage.getItem('uploadedCodes')) || [];
+                if (codeId) {
+                    // Chỉnh sửa code
+                    let fileData = storedData.find(code => code.id == codeId);
+                    fileData.name = codeName;
+                    fileData.type = codeType;
+                    fileData.price = codePrice;
+                    fileData.author = authorName;
+                    fileData.demo = demoLink;
+                    fileData.download = downloadLink;
+                    if (imageInput.files.length > 0) {
+                        let fileReader = new FileReader();
+                        fileReader.onload = function(event) {
+                            fileData.imageUrl = event.target.result;
+                            localStorage.setItem('uploadedCodes', JSON.stringify(storedData));
+                            updateCodeList();
+                            bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
+                            Swal.fire({
+                                icon: 'success',
+                                title: '✅ Cập nhật thành công!',
+                                text: 'Source code đã được cập nhật.',
+                                confirmButtonColor: '#e74c3c'
+                            });
+                        };
+                        fileReader.readAsDataURL(imageInput.files[0]);
+                    } else {
+                        localStorage.setItem('uploadedCodes', JSON.stringify(storedData));
+                        updateCodeList();
+                        bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
+                        Swal.fire({
+                            icon: 'success',
+                            title: '✅ Cập nhật thành công!',
+                            text: 'Source code đã được cập nhật.',
+                            confirmButtonColor: '#e74c3c'
+                        });
+                    }
+                } else {
+                    // Upload code mới
+                    let fileReader = new FileReader();
+                    fileReader.onload = function(event) {
+                        let fileData = {
+                            id: Date.now(),
+                            type: codeType,
+                            name: codeName,
+                            price: codePrice,
+                            author: authorName,
+                            demo: demoLink,
+                            download: downloadLink,
+                            imageUrl: event.target.result
+                        };
+                        storedData.push(fileData);
+                        localStorage.setItem('uploadedCodes', JSON.stringify(storedData));
+                        updateCodeList();
+                        bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
+                        Swal.fire({
+                            icon: 'success',
+                            title: '✅ Upload thành công!',
+                            text: 'Source code đã được thêm vào danh sách.',
+                            confirmButtonColor: '#e74c3c'
+                        });
+                    };
+                    fileReader.readAsDataURL(imageInput.files[0]);
+                }
+            });
+
+            // Tìm kiếm code
+            document.getElementById('searchInput').addEventListener('input', () => {
+                let searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                let storedData = JSON.parse(localStorage.getItem('uploadedCodes')) || [];
+                let filteredData = storedData.filter(code =>
+                    code.name.toLowerCase().includes(searchTerm) || code.type.toLowerCase().includes(searchTerm)
+                );
+                renderCodeList(filteredData);
+            });
+        });
+
+        function updateCodeList() {
+            let storedData = JSON.parse(localStorage.getItem('uploadedCodes')) || [];
+            renderCodeList(storedData);
+        }
+
+        function renderCodeList(data) {
+            let codeList = document.getElementById('codeList');
+            codeList.innerHTML = '';
+            document.getElementById('codeCount').textContent = data.length;
+            data.forEach(code => {
+                codeList.innerHTML += `
+                    <div class="code-item">
+                        <img src="${code.imageUrl}" class="card-img-top" alt="Demo">
+                        <div class="card-body">
+                            <h5 class="card-title">${code.name} <small>(${code.type})</small></h5>
+                            <p class="card-text">Người đăng: ${code.author}</p>
+                            <p class="price">${code.price > 0 ? code.price + ' VNĐ' : 'Miễn phí'}</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="${code.demo}" class="btn btn-info btn-sm" target="_blank">Xem Demo</a>
+                                ${code.price > 0 ? `<button class="btn btn-warning btn-sm" onclick="showQRModal()">Mua</button>` : `<a href="${code.download}" class="btn btn-success btn-sm" target="_blank">Tải Code</a>`}
+                                <button class="btn btn-primary btn-sm" onclick="editCode(${code.id})">Chỉnh Sửa</button>
+                                <button class="btn btn-danger btn-sm" onclick="confirmDelete(${code.id})">Xóa</button>
                             </div>
                         </div>
                     </div>`;
             });
         }
+
         function showQRModal() {
-            document.getElementById('qrModal').style.display = 'flex';
+            new bootstrap.Modal(document.getElementById('qrModal')).show();
         }
-        function closeQRModal() {
-            document.getElementById('qrModal').style.display = 'none';
+
+        function editCode(id) {
+            let storedData = JSON.parse(localStorage.getItem('uploadedCodes')) || [];
+            let code = storedData.find(c => c.id == id);
+            if (code) {
+                document.getElementById('codeId').value = code.id;
+                document.getElementById('codeName').value = code.name;
+                document.getElementById('codeType').value = code.type;
+                document.getElementById('codePrice').value = code.price;
+                document.getElementById('authorName').value = code.author;
+                document.getElementById('demoLink').value = code.demo;
+                document.getElementById('downloadLink').value = code.download;
+                document.getElementById('uploadBtn').textContent = 'Cập Nhật';
+                new bootstrap.Modal(document.getElementById('uploadModal')).show();
+            }
         }
-        function deleteCode(id) {
-            let storedData = JSON.parse(localStorage.getItem("uploadedCodes")) || [];
-            storedData = storedData.filter(code => code.id !== id);
-            localStorage.setItem("uploadedCodes", JSON.stringify(storedData));
-            updateCodeList();
+
+        function confirmDelete(id) {
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            confirmModal.show();
+            document.getElementById('confirmDeleteBtn').onclick = () => {
+                let storedData = JSON.parse(localStorage.getItem('uploadedCodes')) || [];
+                storedData = storedData.filter(code => code.id !== id);
+                localStorage.setItem('uploadedCodes', JSON.stringify(storedData));
+                updateCodeList();
+                confirmModal.hide();
+                Swal.fire({
+                    icon: 'success',
+                    title: '✅ Đã xóa!',
+                    text: 'Source code đã được xóa thành công.',
+                    confirmButtonColor: '#e74c3c'
+                });
+            };
         }
-        updateCodeList();
     </script>
 </body>
 </html>
-  <!-- <button class="btn btn-danger btn-sm" onclick="deleteCode(${code.id})">Xóa</button> -->

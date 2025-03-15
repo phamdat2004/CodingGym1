@@ -1,101 +1,410 @@
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>AI Chat - CodeXpert ✨</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Thêm SweetAlert2 cho thông báo -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        /* 🌸 Tổng thể */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ff7ca3;
+            background: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
-        
-        .register-box {
-            background: #001f3f;
-            color: rgb(255, 128, 179);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .register-box a {
-            display: block;
-            background: #ff9800;
-            padding: 10px;
+
+        /* 🏡 Header */
+        .header-container {
             text-align: center;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: #fff;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .header-container img {
+            border: 5px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .header-container img:hover {
+            transform: scale(1.1);
+        }
+        .header-container h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #ff6b6b, #e74c3c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+        .header-container p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 🌟 Navbar */
+        .navbar {
+            background: #3498db;
+            border-radius: 50px;
+            margin: 20px auto;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #ffeb3b;
+        }
+
+        /* 🤖 Chat Container */
+        .chat-container {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+        }
+        .chat-header {
+            background: #3498db;
+            color: #fff;
+            border-radius: 20px 20px 0 0;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .chat-header button:hover {
+            color: #ffeb3b;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f1f1f1;
+            border-radius: 0 0 20px 20px;
+        }
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: #3498db;
+            color: #fff;
+            margin-left: auto;
+            text-align: right;
+        }
+        .bot-message {
+            background: #e9ecef;
+            color: #333;
+            margin-right: auto;
+        }
+        .typing-indicator {
+            background: #e9ecef;
+            color: #333;
+            margin-right: auto;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            display: none;
+        }
+        .typing-indicator span {
+            animation: blink 1s infinite;
         }
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
-        .blinking-text {
-            animation: blink 1s infinite;
-            color: rgb(255, 0, 102);
+        .chat-input {
+            padding: 15px;
+            background: #fff;
+            border-top: 1px solid #dfe6e9;
+            display: flex;
+            gap: 10px;
+            border-radius: 0 0 20px 20px;
         }
-     
-        .marquee-text {
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            display: block;
-            width: 100%;
-            animation: marquee 20s linear infinite;
-            color: rgb(255, 0, 0);
-            font-size: 28px;
-            font-weight: bold;
-            margin-top: 20px;
+        .chat-input input {
+            border-radius: 25px;
+            padding: 10px 15px;
+            border: 1px solid #dfe6e9;
+            transition: border-color 0.3s ease;
+            flex: 1;
+        }
+        .chat-input input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        .chat-input button {
+            background: #e74c3c;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .chat-input button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* 📜 Scroll to Bottom Button */
+        .scroll-to-bottom {
+            position: absolute;
+            bottom: 100px;
+            right: 30px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: none;
+        }
+        .scroll-to-bottom:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 80vh;
+                margin: 10px;
+            }
+            .chat-header {
+                font-size: 1.2rem;
+            }
+            .chat-message {
+                max-width: 85%;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
-            <h1>Đạt làm BackEnd 💻</h1>
-            <p>Xin chào mọi người hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ</br>Trang web này tạo ra nhằm mục đích để ae Dev có thể trao đổi kiến thức trong lĩnh vực IT</p>
-            <p>Chuyên cung cấp source code để học tập và nghiên cứu</p>
-        </div>
+    <!-- 💖 Header -->
+    <header class="header-container">
+        <img src="img/anhdat.jpg" alt="Ảnh của bạn" class="rounded-circle" width="150">
+        <h1>Đạt Làm Backend 💻</h1>
+        <p>Xin chào mọi người! Hiện mình đang làm Dev Backend Java trong lĩnh vực công nghệ.</p>
+        <p>Trang web này tạo ra để anh em Dev trao đổi kiến thức IT và tải source code chất lượng.</p>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <!-- 🌟 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fa-solid fa-backward"></i> Về trang chủ</a>
-        
+            <a class="navbar-brand" href="index.html"><i class="fas fa-home"></i> Về Trang Chủ</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Danh mục</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
                 </ul>
-                <form class="d-flex ms-3" id="searchForm">
-                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Tìm kiếm...">
-                </form>
             </div>
-
         </div>
     </nav>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        
-        <div class="chat-container p-4">
-            <h2 class="text-center mb-3">🤖 AI Chat</h2>
-            <div id="chat-box" class="chat-box mb-3"></div>
-            <div class="input-group">
-                <input type="text" id="user-input" class="form-control" placeholder="Nhập câu hỏi..." onkeypress="handleKeyPress(event)">
-                <button class="btn btn-primary" onclick="sendMessage()">Gửi</button>
-            </div>
+
+    <!-- 🤖 Chat Container -->
+    <div class="chat-container position-relative">
+        <div class="chat-header">
+            <span>🤖 AI Chat - CodeXpert</span>
+            <button onclick="clearChat()"><i class="fas fa-trash-alt"></i> Xóa Lịch Sử</button>
+        </div>
+        <div id="chat-box" class="chat-box">
+            <!-- Tin nhắn sẽ được thêm bằng JavaScript -->
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <span>Bot đang trả lời...</span>
+        </div>
+        <button class="scroll-to-bottom" id="scrollToBottom" onclick="scrollToBottom()"><i class="fas fa-chevron-down"></i></button>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Nhập câu hỏi của bạn...">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Gửi</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Kiểm tra đăng nhập
+            let isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '⚠️ Vui lòng đăng nhập!',
+                    text: 'Bạn cần đăng nhập để sử dụng AI Chat.',
+                    confirmButtonColor: '#e74c3c'
+                }).then(() => {
+                    window.location.href = 'index.html';
+                });
+                return;
+            }
+
+            // Load lịch sử chat từ localStorage
+            const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+            chatHistory.forEach(msg => addMessage(msg.text, msg.sender));
+
+            // Chào mừng người dùng
+            if (chatHistory.length === 0) {
+                addMessage('Chào bạn! Tôi là AI Chat của CodeXpert. Hôm nay tôi có thể giúp gì cho bạn? 😊', 'bot');
+            }
+
+            // Xử lý cuộn và hiển thị nút "Cuộn xuống"
+            const chatBox = document.getElementById('chat-box');
+            const scrollToBottomBtn = document.getElementById('scrollToBottom');
+            chatBox.addEventListener('scroll', () => {
+                if (chatBox.scrollTop + chatBox.clientHeight < chatBox.scrollHeight - 50) {
+                    scrollToBottomBtn.style.display = 'flex';
+                } else {
+                    scrollToBottomBtn.style.display = 'none';
+                }
+            });
+        });
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value.trim();
+            if (!userInput) return;
+
+            // Thêm tin nhắn người dùng
+            addMessage(`Bạn: ${userInput}`, 'user');
+            document.getElementById('user-input').value = '';
+
+            // Hiển thị typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'block';
+            scrollToBottom();
+
+            // Giả lập AI trả lời (ở đây sẽ gọi Grok 3 để trả lời)
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                const botResponse = getBotResponse(userInput);
+                addMessage(`Bot: ${botResponse}`, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', `${sender}-message`);
+            messageDiv.textContent = text;
+            chatBox.appendChild(messageDiv);
+            scrollToBottom();
+
+            // Lưu vào localStorage
+            const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+            chatHistory.push({ text, sender });
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        }
+
+        function clearChat() {
+            Swal.fire({
+                title: 'Xác nhận xóa lịch sử chat?',
+                text: 'Bạn sẽ không thể khôi phục lịch sử chat sau khi xóa!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e74c3c',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('chat-box').innerHTML = '';
+                    localStorage.removeItem('chatHistory');
+                    addMessage('Lịch sử chat đã được xóa. Hỏi tôi bất cứ điều gì nhé! 😊', 'bot');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đã xóa!',
+                        text: 'Lịch sử chat đã được xóa thành công.',
+                        confirmButtonColor: '#e74c3c'
+                    });
+                }
+            });
+        }
+
+        function scrollToBottom() {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Hàm giả lập trả lời của AI (ở đây sử dụng khả năng của Grok 3)
+        function getBotResponse(userInput) {
+            // Dựa trên câu hỏi của người dùng, mình (Grok 3) sẽ trả lời
+            userInput = userInput.toLowerCase();
+
+            // Một số câu trả lời mẫu (có thể mở rộng)
+            if (userInput.includes('chào') || userInput.includes('hi')) {
+                return 'Chào bạn! Rất vui được trò chuyện với bạn. Bạn cần giúp gì hôm nay? 😊';
+            } else if (userInput.includes('code') || userInput.includes('source')) {
+                return 'Bạn muốn tìm source code à? Tôi có thể gợi ý một số loại code như Android, PHP, Java, hoặc ASP.NET. Bạn thích loại nào?';
+            } else if (userInput.includes('lập trình') || userInput.includes('programming')) {
+                return 'Lập trình là một lĩnh vực rất thú vị! Bạn đang học ngôn ngữ nào? Tôi có thể giúp bạn với Java, Python, JavaScript, hoặc nhiều ngôn ngữ khác. Hỏi tôi nhé!';
+            } else if (userInput.includes('học') || userInput.includes('hướng dẫn')) {
+                return 'Bạn muốn học gì? Tôi có thể hướng dẫn bạn lập trình, thiết kế web, hoặc giải bài tập. Cứ hỏi thoải mái!';
+            } else if (userInput.includes('ai là ai') || userInput.includes('bạn là ai')) {
+                return 'Tôi là Grok 3, được tạo ra bởi xAI. Tôi ở đây để giúp bạn trả lời mọi câu hỏi, từ lập trình đến kiến thức chung. Hỏi tôi bất cứ điều gì nhé!';
+            } else {
+                // Trả lời mặc định nếu không nhận diện được câu hỏi
+                return 'Xin lỗi, tôi chưa hiểu rõ câu hỏi của bạn. Bạn có thể hỏi lại hoặc cung cấp thêm thông tin không? Tôi rất muốn giúp bạn! 😊';
+            }
+        }
+    </script>
 </body>
 </html>
